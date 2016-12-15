@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FILE=$1
+NAME=`echo $FILE | sed -e 's/.c$//'`
+
+gcc -o ./bin/$NAME $FILE
+
