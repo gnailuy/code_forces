@@ -27,4 +27,6 @@ int main (int argc, char * argv[]) {
 
     // printf ("%I64d %d\n", ice_creams, distress);
     printf ("%lld %d\n", ice_creams, distress);
+
+    return 0;
 }
