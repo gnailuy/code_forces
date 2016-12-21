@@ -6,7 +6,8 @@ int main (int argc, char * argv[]) {
     int n;
     scanf ("%d", &n);
 
-    int numbers = 0, i = 1, nn = 9, digits = 0;
+    int i = 1;
+    long long numbers = 0, nn = 9, digits = 0;
     while (numbers + nn <= n) {
         numbers += nn;
         digits += i * nn;
@@ -14,7 +15,8 @@ int main (int argc, char * argv[]) {
     }
     digits += i * (n - numbers);
 
-    printf ("%d\n", digits);
+    // printf ("%I64d\n", digits);
+    printf ("%lld\n", digits);
 
     return 0;
 }
