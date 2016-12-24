@@ -19,16 +19,16 @@ int find_left_child_index (int index) {
 void insert_to_binary_heap (int * heap, int tail, int number) {
     heap[tail] = number;
 
-    int parent;
-    do {
-        parent = find_parent_index (tail);
+    int parent = find_parent_index (tail);
+    while (parent >= 0) {
         if (heap[parent] > heap[tail]) {
             swap (heap, parent, tail);
             tail = parent;
         } else {
             break;
         }
-    } while (parent >= 0);
+        parent = find_parent_index (tail);
+    }
 }
 
 int remove_from_binary_heap (int * heap, int tail, int remove_pos) {
