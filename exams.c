@@ -61,6 +61,7 @@ int main (int argc, char * argv[]) {
 
     printf ("%d\n", current_date);
 
+    free (exams);
     return 0;
 }
 
