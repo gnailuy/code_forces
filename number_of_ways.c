@@ -12,27 +12,35 @@ int main (int argc, char * argv[]) {
         scanf ("%d", &a[i]);
         sum += a[i];
     }
-    int result = 0;
+    long long result = 0;
 
     if (sum % 3 == 0) {
         one_third = sum / 3;
+
+        int * tail = (int *) malloc (sizeof(int) * n);
+        int tail_cnt = 0;
+        long long last = 0;
+        for (int j = n - 1; j >= 0; j--) {
+            last += a[j];
+            if (one_third == last) {
+                tail[j] = ++tail_cnt;
+            } else {
+                tail[j] = tail_cnt;
+            }
+        }
 
         long long first = 0;
         for (int i = 0; i < n - 2; i++) {
             first += a[i];
             if (one_third == first) {
-                long long second = 0;
-                for (int j = i + 1; j < n - 1; j++) {
-                    second += a[j];
-                    if (one_third == second) {
-                        result++;
-                    }
-                }
+                result += tail[i + 2];
             }
         }
+
+        free (tail);
     }
 
-    printf ("%d\n", result);
+    printf ("%I64d\n", result);
 
     free (a);
     return 0;
