@@ -32,13 +32,29 @@ func main() {
 		array[a][0]++
 	}
 
-	for i := 0; i <= n; i++ {
-		for j := 0; j <= n; j++ {
-			fmt.Printf("%d ", array[i][j])
+	var max_height int = 0
+	for i := 1; i <= array[0][0]; i++ {
+		root := array[0][i]
+		height := 1 + calculate_height(root, array)
+		if height > max_height {
+			max_height = height
 		}
-		fmt.Println()
 	}
-	// Construct the tree and record the max height
 
-	// fmt.Println(max_height)
+	fmt.Println(max_height)
+}
+
+func calculate_height(root int, array [][]int) int {
+	if array[root][0] > 0 {
+		var max_height int = 0
+		for i := 1; i <= array[root][0]; i++ {
+			height := calculate_height(array[root][i], array)
+			if height > max_height {
+				max_height = height
+			}
+		}
+		return max_height + 1
+	} else {
+		return 0
+	}
 }
