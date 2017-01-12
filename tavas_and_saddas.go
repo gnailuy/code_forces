@@ -19,7 +19,7 @@ func main() {
 			} else {
 				return
 			}
-		} else if c == '\n' {
+		} else if c != '4' && c != '7' {
 			length = i
 			break
 		} else {
@@ -27,9 +27,11 @@ func main() {
 		}
 	}
 
-	var index int = 0 // 2^1 + 2^2 + ... + 2^(length - 1)
-
+	var index int = 1 + 2*((1<<uint(length-1))-1) // 1 + 2 + 4 + ... + 2^(length-1)
 	for i := 0; i < length; i++ {
-		fmt.Printf("%c\n", digits[i])
+		if digits[i] == '7' {
+			index += (1 << uint(length-i-1)) // 2^(length-i-1)
+		}
 	}
+	fmt.Println(index)
 }
