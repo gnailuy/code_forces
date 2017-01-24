@@ -47,7 +47,7 @@ func main() {
 		return
 	}
 
-	quick_sort(money, friendship, 0, n-1)
+	merge_sort(money, friendship, 0, n-1)
 
 	var max_ffactor int64 = 0
 	var ffactor int64 = int64(friendship[0])
@@ -67,48 +67,67 @@ func main() {
 			p++
 		}
 		start = p
+		// Move end pointer forward
 		for end < n && money[end] < money[start]+d {
 			ffactor += int64(friendship[end])
 			end++
 		}
+		// See if ffactor gets larger
 		if ffactor > max_ffactor {
 			max_ffactor = ffactor
 		}
-	}
-	if ffactor > max_ffactor {
-		max_ffactor = ffactor
 	}
 
 	fmt.Println(max_ffactor)
 }
 
-func quick_sort(array, company []int, start, end int) {
-	if start < end {
-		p := partition(array, company, start, end)
-		quick_sort(array, company, start, p-1)
-		quick_sort(array, company, p+1, end)
+func merge_sort(buffer, company []int, start, end int) {
+	if end > start {
+		middle := (end + start) / 2
+		merge_sort(buffer, company, start, middle)
+		merge_sort(buffer, company, middle+1, end)
+		merge(buffer, company, start, middle, end)
 	}
 }
 
-func partition(array, company []int, start, end int) int {
-	pivot := array[end]
+func merge(buffer, company []int, start, middle, end int) {
+	sorted := make([]int, end-start+1)
+	c := make([]int, end-start+1)
+
 	i := start
-	for j := start; j < end; j++ {
-		if array[j] <= pivot {
-			swap(array, i, j)
-			swap(company, i, j)
+	j := middle + 1
+	k := 0
+	for i <= middle && j <= end {
+		if buffer[i] <= buffer[j] {
+			sorted[k] = buffer[i]
+			c[k] = company[i]
 			i++
+		} else {
+			sorted[k] = buffer[j]
+			c[k] = company[j]
+			j++
 		}
+		k++
 	}
-	swap(array, i, end)
-	swap(company, i, end)
-	return i
-}
+	for i <= middle {
+		sorted[k] = buffer[i]
+		c[k] = company[i]
+		k++
+		i++
+	}
+	for j <= end {
+		sorted[k] = buffer[j]
+		c[k] = company[j]
+		k++
+		j++
+	}
 
-func swap(array []int, i, j int) {
-	if i != j {
-		tmp := array[i]
-		array[i] = array[j]
-		array[j] = tmp
+	i = start
+	k = 0
+	for i <= end {
+		buffer[i] = sorted[k]
+		company[i] = c[k]
+		i++
+		k++
 	}
 }
