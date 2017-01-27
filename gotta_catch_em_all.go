@@ -10,8 +10,7 @@ import (
 
 func main() {
 	const mmd string = "Bulbasaur"
-	var n int
-	var ss []byte
+	var s string
 
 	re := regexp.MustCompile(`\r?\n`)
 
@@ -21,36 +20,42 @@ func main() {
 			return
 		}
 	} else {
-		_s = re.ReplaceAllString(_s, "")
-		n = len(_s)
-		ss = make([]byte, n)
-		for i := 0; i < n; i++ {
-			ss[i] = _s[i]
+		s = re.ReplaceAllString(_s, "")
+	}
+
+	idx := -1
+	storage := make([][]int, len(mmd))
+	for i := 0; i < len(mmd); i++ {
+		met := false
+		for j := 0; j < idx; j++ {
+			if storage[j][0] == int(mmd[i]) {
+				storage[j][1]++
+				met = true
+				break
+			}
+		}
+		if !met {
+			idx++
+			storage[idx] = make([]int, 3)
+			storage[idx][0] = int(mmd[i])
+			storage[idx][1] = 1
 		}
 	}
 
-	var count int = 0
-	var p_mmd int = 0
-	var p_s int = 0
-	var query_cnt int = 0
-	for true {
-		if mmd[p_mmd] == ss[p_s] {
-			ss[p_s] = ' '
-			query_cnt = 0
-			p_mmd++
-			if p_mmd == len(mmd) {
-				p_mmd = 0
-				count++
-			}
-		} else {
-			p_s++
-			if p_s == n {
-				p_s = 0
-			}
-			query_cnt++
-			if query_cnt > n {
+	for i := 0; i < len(s); i++ {
+		for j := 0; j <= idx; j++ {
+			if storage[j][0] == int(s[i]) {
+				storage[j][2]++
 				break
 			}
+		}
+	}
+
+	var count int = -1
+	for i := 0; i <= idx; i++ {
+		c := storage[i][2] / storage[i][1]
+		if c < count || count < 0 {
+			count = c
 		}
 	}
 
