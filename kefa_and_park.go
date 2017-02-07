@@ -82,32 +82,15 @@ func main() {
 	}
 
 	root := &Vertex{1, cats[0], nil, nil, nil}
-	build_sub_tree(root, edges, cats)
-
-	fmt.Println(visit_sub_tree(root, root.cat, m))
+	fmt.Println(build_sub_tree(root, edges, cats, root.cat, m))
 }
 
-func visit_sub_tree(node *Vertex, current_cat, max_cat int) int {
-	if node.children == nil {
-		return 1
-	} else {
-		res := 0
-		for child := node.children; child != nil; child = child.next_sibling {
-			if child.cat == 0 {
-				res += visit_sub_tree(child, 0, max_cat)
-			} else if child.cat+current_cat <= max_cat {
-				res += visit_sub_tree(child, child.cat+current_cat, max_cat)
-			}
-		}
-		return res
-	}
-}
-
-func build_sub_tree(node *Vertex, edges *Edge, cats []int) {
+func build_sub_tree(node *Vertex, edges *Edge, cats []int, cat, max_cat int) int {
 	var last_child *Vertex = nil
 
 	var prev *Edge = edges
 	var e *Edge = edges.next
+	var cut bool = false
 	for e != nil {
 		if e.x != node.idx && e.y != node.idx {
 			prev = e
@@ -122,13 +105,17 @@ func build_sub_tree(node *Vertex, edges *Edge, cats []int) {
 			child_idx = e.x
 		}
 		if node.parent == nil || child_idx != node.parent.idx {
-			new_child := &Vertex{child_idx, cats[child_idx-1], node, nil, nil}
-			if node.children == nil {
-				node.children = new_child
-				last_child = new_child
+			if cat+cats[child_idx-1] <= max_cat {
+				new_child := &Vertex{child_idx, cats[child_idx-1], node, nil, nil}
+				if node.children == nil {
+					node.children = new_child
+					last_child = new_child
+				} else {
+					last_child.next_sibling = new_child
+					last_child = new_child
+				}
 			} else {
-				last_child.next_sibling = new_child
-				last_child = new_child
+				cut = true
 			}
 			prev.next = e.next
 			e = e.next
@@ -137,7 +124,24 @@ func build_sub_tree(node *Vertex, edges *Edge, cats []int) {
 			e = e.next
 		}
 	}
-	for child := node.children; child != nil; child = child.next_sibling {
-		build_sub_tree(child, edges, cats)
+
+	if node.children == nil {
+		if cut {
+			return 0
+		} else {
+			return 1
+		}
 	}
+
+	res := 0
+	for child := node.children; child != nil; child = child.next_sibling {
+		var c int
+		if child.cat == 0 {
+			c = 0
+		} else {
+			c = cat + 1
+		}
+		res += build_sub_tree(child, edges, cats, c, max_cat)
+	}
+	return res
 }
