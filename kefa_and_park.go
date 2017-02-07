@@ -11,8 +11,9 @@ import (
 )
 
 type Edge struct {
-	x int
-	y int
+	x    int
+	y    int
+	next *Edge
 }
 
 type Vertex struct {
@@ -49,7 +50,8 @@ func main() {
 		cats[i] = v
 	}
 
-	edges := make([]Edge, n-1)
+	var edges *Edge = &Edge{0, 0, nil}
+	var p *Edge = edges
 	for i := 0; i < n-1; i++ {
 		if _e, err := reader.ReadString('\n'); err != nil {
 			if err == io.EOF {
@@ -73,7 +75,9 @@ func main() {
 			if x > y {
 				x, y = y, x
 			}
-			edges[i] = Edge{x, y}
+			new_edge := &Edge{x, y, nil}
+			p.next = new_edge
+			p = p.next
 		}
 	}
 
@@ -99,16 +103,23 @@ func visit_sub_tree(node *Vertex, current_cat, max_cat int) int {
 	}
 }
 
-func build_sub_tree(node *Vertex, edges []Edge, cats []int) {
+func build_sub_tree(node *Vertex, edges *Edge, cats []int) {
 	var last_child *Vertex = nil
-	for i := 0; i < len(edges); i++ {
-		var child_idx int
-		if edges[i].x == node.idx {
-			child_idx = edges[i].y
-		} else if edges[i].y == node.idx {
-			child_idx = edges[i].x
-		} else {
+
+	var prev *Edge = edges
+	var e *Edge = edges.next
+	for e != nil {
+		if e.x != node.idx && e.y != node.idx {
+			prev = e
+			e = e.next
 			continue
+		}
+
+		var child_idx int
+		if e.x == node.idx {
+			child_idx = e.y
+		} else if e.y == node.idx {
+			child_idx = e.x
 		}
 		if node.parent == nil || child_idx != node.parent.idx {
 			new_child := &Vertex{child_idx, cats[child_idx-1], node, nil, nil}
@@ -119,6 +130,11 @@ func build_sub_tree(node *Vertex, edges []Edge, cats []int) {
 				last_child.next_sibling = new_child
 				last_child = new_child
 			}
+			prev.next = e.next
+			e = e.next
+		} else {
+			prev = e
+			e = e.next
 		}
 	}
 	for child := node.children; child != nil; child = child.next_sibling {
