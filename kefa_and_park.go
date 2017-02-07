@@ -10,12 +10,6 @@ import (
 	"strings"
 )
 
-type Edge struct {
-	x    int
-	y    int
-	next *Edge
-}
-
 type Vertex struct {
 	idx          int
 	cat          int
@@ -50,8 +44,8 @@ func main() {
 		cats[i] = v
 	}
 
-	var edges *Edge = &Edge{0, 0, nil}
-	var p *Edge = edges
+	edges := make([][]int, n)
+	const init_size int = 100
 	for i := 0; i < n-1; i++ {
 		if _e, err := reader.ReadString('\n'); err != nil {
 			if err == io.EOF {
@@ -72,12 +66,20 @@ func main() {
 			if err != nil {
 				return
 			}
-			if x > y {
-				x, y = y, x
+
+			if edges[x-1] == nil {
+				edges[x-1] = make([]int, 0, init_size)
+				edges[x-1] = append(edges[x-1], 0)
 			}
-			new_edge := &Edge{x, y, nil}
-			p.next = new_edge
-			p = p.next
+			edges[x-1][0] += 1
+			edges[x-1] = append(edges[x-1], y)
+
+			if edges[y-1] == nil {
+				edges[y-1] = make([]int, 0, init_size)
+				edges[y-1] = append(edges[y-1], 0)
+			}
+			edges[y-1][0] += 1
+			edges[y-1] = append(edges[y-1], x)
 		}
 	}
 
@@ -85,25 +87,12 @@ func main() {
 	fmt.Println(build_sub_tree(root, edges, cats, root.cat, m))
 }
 
-func build_sub_tree(node *Vertex, edges *Edge, cats []int, cat, max_cat int) int {
+func build_sub_tree(node *Vertex, edges [][]int, cats []int, cat, max_cat int) int {
 	var last_child *Vertex = nil
 
-	var prev *Edge = edges
-	var e *Edge = edges.next
 	var cut bool = false
-	for e != nil {
-		if e.x != node.idx && e.y != node.idx {
-			prev = e
-			e = e.next
-			continue
-		}
-
-		var child_idx int
-		if e.x == node.idx {
-			child_idx = e.y
-		} else if e.y == node.idx {
-			child_idx = e.x
-		}
+	for i := 1; i <= edges[node.idx-1][0]; i++ {
+		var child_idx int = edges[node.idx-1][i]
 		if node.parent == nil || child_idx != node.parent.idx {
 			if cat+cats[child_idx-1] <= max_cat {
 				new_child := &Vertex{child_idx, cats[child_idx-1], node, nil, nil}
@@ -117,11 +106,6 @@ func build_sub_tree(node *Vertex, edges *Edge, cats []int, cat, max_cat int) int
 			} else {
 				cut = true
 			}
-			prev.next = e.next
-			e = e.next
-		} else {
-			prev = e
-			e = e.next
 		}
 	}
 
