@@ -13,7 +13,8 @@ func main() {
 		return
 	}
 
-	array := make([]int, n)
+	moves := 0
+
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(bufio.ScanWords)
 	for i := 0; i < n && scanner.Scan(); i++ {
@@ -21,22 +22,12 @@ func main() {
 		if err != nil {
 			return
 		}
-		array[i] = a
-	}
+		moves += a - 1
 
-	var tail_value int = 0
-	for i := n - 1; i >= 0; i-- {
-		if i%2 == 0 {
-			array[i] -= tail_value
-			tail_value += array[i]
+		if moves%2 == 0 {
+			fmt.Println(2)
 		} else {
-			array[i] += tail_value
-			tail_value -= array[i]
+			fmt.Println(1)
 		}
 	}
-
-	for i := 0; i < n; i++ {
-		fmt.Printf("%d ", array[i])
-	}
-	fmt.Println()
 }
