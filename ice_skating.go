@@ -64,12 +64,17 @@ func main() {
 			}
 		}
 
+		more := false
 		for j := 0; j < n; j++ {
 			if drifts[j][0] >= 0 {
 				sets[i+1] = make(map[[2]int]bool)
 				sets[i+1][drifts[j]] = true
+				more = true
 				break
 			}
+		}
+		if !more {
+			break
 		}
 	}
 
