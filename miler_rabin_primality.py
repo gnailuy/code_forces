@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
+# From: https://rosettacode.org/wiki/Miller%E2%80%93Rabin_primality_test#Python:_Proved_correct_up_to_large_N
 
 def _try_composite(a, d, n, s):
     if pow(a, d, n) == 1:
