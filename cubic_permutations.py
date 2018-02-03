@@ -9,7 +9,7 @@ def cubes_with_x_digits(x):
 
 
 def sort_digits(n):
-    return ''.join([str(x) for x in sorted([int(c) for c in str(n)])])
+    return ''.join([str(x) for x in sorted(str(n))])
 
 
 digits = 3
