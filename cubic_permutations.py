@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from math import ceil, floor
-
-
-def cubes_of_power(x):
+def cubes_with_x_digits(x):
+    from math import ceil, floor
     lower = floor((10 ** (x - 1)) ** (1. / 3))
     upper = ceil((10 ** x - 1) ** (1. / 3))
     for i in range(lower, upper):
@@ -14,21 +12,13 @@ def sort_digits(n):
     return ''.join([str(x) for x in sorted([int(c) for c in str(n)])])
 
 
-digits = 2
+digits = 3
 while True:
-    cubes = [x for x in cubes_of_power(digits)]
-    cube_reps = [sort_digits(x) for x in cubes]
-    counts = dict()
-    for i in cube_reps:
-        counts[i] = counts.get(i, 0) + 1
-
-    found = False
-    for i in counts:
-        if counts[i] == 5:
-            print([x for x in cubes if sort_digits(x) == i])
-            found = True
-    if found:
+    cubes = [x for x in cubes_with_x_digits(digits)]
+    cube_repr = [sort_digits(x) for x in cubes]
+    repr_cnt = [cube_repr.count(x) >= 5 for x in cube_repr]
+    if any(repr_cnt):
+        print([x[0] for x in zip(cubes, repr_cnt) if x[1]])
         break
-
     digits += 1
 
