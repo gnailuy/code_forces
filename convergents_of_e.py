@@ -17,7 +17,10 @@ def convergents(e, i):
 
 
 def main(argv):
-    upper = int(argv[1]) - 1
+    if len(argv) < 2:
+        upper = 99
+    else:
+        upper = int(argv[1]) - 1
     e = [2] + seq_n(upper)
     d, n = convergents(e, 0)
     print(sum(int(i) for i in str(n)))
