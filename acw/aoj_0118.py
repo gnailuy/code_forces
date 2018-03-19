@@ -73,7 +73,7 @@ def devide_orchard(block, h, w):
     return i
 
 
-with open('aoi_0118.data', 'r') as f:
+with open('aoj_0118.data', 'r') as f:
     while True:
         l = f.readline()
         hw = [int(x) for x in l.strip().split(' ')]
