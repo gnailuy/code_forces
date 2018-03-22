@@ -1,3 +1,5 @@
+# http://poj.org/problem?id=3009
+
 import copy
 
 def read_board(f, w, h):
