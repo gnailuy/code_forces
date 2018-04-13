@@ -62,4 +62,8 @@
 3. Arithmetic Expression (((2 - 5) + 1) * 2): Dijkstra's Double Stack, 一个操作符栈，一个操作数栈，可转后缀表达式
 4. Editor Buffer: 支持插入删除左移右移, 用两个栈头对头，左右移动时一个栈出一个栈进
 5. Reverse a Linked List: 开一个新链表头，模拟旧链表出栈新链表入栈；可以用递归
+6. 调和级数 1 + 1/2 + 1/3 + ... + 1/N ~ lnN
+7. 斯特灵估计 lgN! ~ NlgN，该估计从斯特灵公式得来
+8. 二项式系数，当 k 相对小时 C(N, k) ~ N^k/k!，其中 N(N-1)(N-2)...(N-k+1) ~ N^k
+9. (1-1/x)^x ~ 1/e
 
