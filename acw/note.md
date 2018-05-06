@@ -100,6 +100,8 @@
 32. Red-Black Tree BST 的插入、删除、查找等操作均可达到对数复杂度，是常用的 Symbol Table 实现；
 33. 取模做 Hash 时，模要取素数，否则被模的元素中总有部分数位无法被利用；
 34. Hash 冲突两个常见解决办法：一个是每个 Hash 位都存放一个链表ST，叫做 Separate Chaining；另一个是冲突之后向后寻找空位，此时需要维护数组长度，经常 Resize；
+35. 用 SymbolTable 实现 List，一个 ST 用来追踪索引 i 到 item；另一个 ST 用来追踪 item 本身；
+36. UniQueue，实现一个 Queue，并用一个 ST 来追踪 Queue 中的元素，enqueue 和 dequeue 的时候分别查询和删除 ST；
 
 # LeetCode
 
