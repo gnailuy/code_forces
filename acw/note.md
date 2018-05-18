@@ -102,6 +102,7 @@
 34. Hash 冲突两个常见解决办法：一个是每个 Hash 位都存放一个链表ST，叫做 Separate Chaining；另一个是冲突之后向后寻找空位，此时需要维护数组长度，经常 Resize；
 35. 用 SymbolTable 实现 List，一个 ST 用来追踪索引 i 到 item；另一个 ST 用来追踪 item 本身；
 36. UniQueue，实现一个 Queue，并用一个 ST 来追踪 Queue 中的元素，enqueue 和 dequeue 的时候分别查询和删除 ST；
+37. Union-Find: 先构建图，然后用搜索方法在图中找出联通区域；第一章的加权森林法，用数组表示链接，c[i]=j 表示 i 指向 j，再用数组保存距离跟节点的距离，总是把小树连到大树上；
 
 # LeetCode
 
