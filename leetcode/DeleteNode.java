@@ -52,6 +52,8 @@ class DeleteNode {
                 p = p.next;
             }
             System.out.println();
+
+            head = null;
         }
     }
 }
