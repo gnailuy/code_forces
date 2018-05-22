@@ -103,6 +103,7 @@
 35. 用 SymbolTable 实现 List，一个 ST 用来追踪索引 i 到 item；另一个 ST 用来追踪 item 本身；
 36. UniQueue，实现一个 Queue，并用一个 ST 来追踪 Queue 中的元素，enqueue 和 dequeue 的时候分别查询和删除 ST；
 37. Union-Find: 先构建图，然后用搜索方法在图中找出联通区域；第一章的加权森林法，用数组表示链接，c[i]=j 表示 i 指向 j，再用数组保存距离跟节点的距离，总是把小树连到大树上；
+38. 有向图环检测：用深度优先遍历，遍历时维护一个 marked 数组和一个 onStack 数组，把遇到的点都标记为 marked 和 onStack，在处理完一个点之后取消 onStack 标记；遍历过程中遇到已经 onStack 的点，则说明有环；如果要返回具体环的路径，则记录一个 edgeTo 数组，追踪当前点是从那里指向来的，检测到环时按照 edgeTo 恢复路径；
 
 # LeetCode
 
