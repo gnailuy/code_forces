@@ -113,6 +113,7 @@
 45. Key-Indexed Counting 适用于 Sorting Key 为小范围整数的情况：1. 遍历对 Key 计数生成 cnt[]；2. 通过 cnt[i] += cnt[i-1] 计算每个 Key 的起始点；3. 遍历，根据起始点放置元素；4. 元素拷贝回原数组，实现排序；
 46. 等长字符串排序：字符串长度为 K，则从右到左做 K 次 Key-Indexed Counting 排序；因为 Key-Indexed Counting 排序是稳定的，所以可行；
 47. 任意字符串排序：从前向后按照字符进行 Key-Indexed Counting 排序，然后对于相同开头的字符串，递归排序其剩余部分；对于小的子字符串集合，切换为插入排序来题高性能；
+48. Trie: 实现一种字符串为 Key 的 Symbol Table，使用树形结构 Share Key Prefix；每个节点上的 N 维数组指向后继节点，节点有值表示对应的 Key 有 Value；
 
 # LeetCode
 
