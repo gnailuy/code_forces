@@ -114,6 +114,7 @@
 46. 等长字符串排序：字符串长度为 K，则从右到左做 K 次 Key-Indexed Counting 排序；因为 Key-Indexed Counting 排序是稳定的，所以可行；
 47. 任意字符串排序：从前向后按照字符进行 Key-Indexed Counting 排序，然后对于相同开头的字符串，递归排序其剩余部分；对于小的子字符串集合，切换为插入排序来题高性能；
 48. Trie: 实现一种字符串为 Key 的 Symbol Table，使用树形结构 Share Key Prefix；每个节点上的 N 维数组指向后继节点，节点有值表示对应的 Key 有 Value；
+49. Ternary Search Tries: 每个节点有一个值，表示当前字符；有三个链接，左边指向比当前字符小的节点，右边指向比当前字符大的节点，中间则指向当前字符顺下去的节点；
 
 # LeetCode
 
