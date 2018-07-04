@@ -115,6 +115,7 @@
 47. 任意字符串排序：从前向后按照字符进行 Key-Indexed Counting 排序，然后对于相同开头的字符串，递归排序其剩余部分；对于小的子字符串集合，切换为插入排序来题高性能；
 48. Trie: 实现一种字符串为 Key 的 Symbol Table，使用树形结构 Share Key Prefix；每个节点上的 N 维数组指向后继节点，节点有值表示对应的 Key 有 Value；
 49. Ternary Search Tries: 每个节点有一个值，表示当前字符；有三个链接，左边指向比当前字符小的节点，右边指向比当前字符大的节点，中间则指向当前字符顺下去的节点；
+50. KMP 字符串搜索算法：首先，为 Pattern 字符串构建一个 dfa，dfa[c][j] 代表遇到字符 c 时，如果位于 Pattern 第 j 个字符，下一步应该对比 Text9(i+1) 和 Pattern(dfa[c][j])；以达到 M+N 的最坏搜索复杂度；
 
 # LeetCode
 
