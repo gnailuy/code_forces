@@ -118,6 +118,7 @@
 50. KMP 字符串搜索算法：首先，为 Pattern 字符串构建一个 dfa，dfa[c][j] 代表遇到字符 c 时，如果位于 Pattern 第 j 个字符，下一步应该对比 Text(i+1) 和 Pattern(dfa[c][j])；以达到 M+N 的最坏搜索复杂度；构建 dfa 数组通过追踪重启状态点 X 进行，状态点 X 的转移方程为 X = dfa[Pattern(j)][X]；
 51. Boyer-Moore 字符串搜索算法：从右往左对比 Pattern 和 Text，当遇到不匹配时，将 Pattern 右移到当前不匹配字符第一次出现的地方；
 52. Rabin-Karp 指纹搜索：通过快速取模的哈希算法，线性求子串的哈希值，和 Pattern 的哈希值进行对比；
+53. 正则表达式到 NFA：使用一个栈来处理嵌套的括号，使用前瞻逻辑检测星号，从正则表达式构建 NFA，然后 NFA 遍历时每一步生成可达集，用于判断字符串是否 Match；NFA 可以用一个图来表示；
 
 # LeetCode
 
