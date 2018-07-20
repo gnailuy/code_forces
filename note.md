@@ -134,3 +134,7 @@
 * Locking
 * Resource Decouple
 
+## Performance
+
+* https://gist.github.com/jboner/2841832
+
