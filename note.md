@@ -51,3 +51,86 @@
 49. Ternary Search Tries: 每个节点有一个值，表示当前字符；有三个链接，左边指向比当前字符小的节点，右边指向比当前字符大的节点，中间则指向当前字符顺下去的节点；
 50. KMP 字符串搜索算法：首先，为 Pattern 字符串构建一个 dfa，dfa[c][j] 代表遇到字符 c 时，如果位于 Pattern 第 j 个字符，下一步应该对比 Text9(i+1) 和 Pattern(dfa[c][j])；以达到 M+N 的最坏搜索复杂度；
 
+# Skill Tree
+
+## Toolkit
+
+* Python
+* Java/Scala
+* Golang
+* C
+* Scripting
+* Git
+
+## ETL
+
+* Yarn
+* MapReduce
+* Spark
+* Spark Streaming
+* HBase
+* HDFS
+
+## Database
+
+### Relational DB
+
+* MySQL
+* PostgreSQL
+* SQL
+* Partition
+* Replication
+
+### NoSQL DB
+
+* Big Table(Column-based): HBase
+* Key Value DB: Riak
+* Document DB: MongoDB
+* Search: Elastic
+* Graph DB: Neo4j
+* ACID: Atomicity, Consistency, Isolation, Durability
+* CAP: Consistency, Availability, Partition Tolerance
+* BASE: Base Available, Soft-state, Eventually Consistence
+
+## Queue
+
+* Kafka
+* NSQ
+* Redis Queue
+
+## Web Development
+
+* MVC
+* Spring Boot
+* Flask/Django
+* Beego
+
+## Frontend
+
+* HTML/CSS
+* Javascript
+
+## HTTP and RPC
+
+* RESTful
+* gRPC
+
+## Cache System
+
+* Redis
+* Memcache
+
+## Moniting and Logging
+
+* Ganglia/Zabbix
+* Log Rotation
+* Logstash
+* WAL (Write Ahead Log)
+
+## Concurrency
+
+* Non-blocking
+* Asynchronous
+* Locking
+* Resource Decouple
+
