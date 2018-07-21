@@ -337,3 +337,36 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 
 * https://gist.github.com/jboner/2841832
 
+# Design Note
+
+## Realtime Chat
+
+1. 客户端使用 Ajax、Comet 等轮询，或者使用 WebSocket 实现双工通信
+2. 服务器端实现一个用户一个 Channel 队列，Channel 中保存用户接受到的消息
+3. 用户各客户端已读位置保存在服务器端，在线时，拉取新的消息
+4. 用户发送的消息保存在接受方的 Channel 中，由客户端负责解析
+
+## Amazon Large Scale
+
+1. EC2: node with web stack
+2. Route 53: DNS Service
+3. RDS: Relational Database Service
+4. DynamoDB: NoSQL Service
+5. Redshift: Data Warehouse
+6. ELB: Load Balance
+7. CloudFront: CDN
+8. S3: Object Store (like Aliyun OSS)
+9. ElastiCache: Redis or Memcache Service
+10. SQS: Queue Service
+
+## DB Large Scale
+
+1. Federation: Split functions into different DB
+2. Sharding: Split DB onto multiple hosts
+3. NoSQL
+
+## Session
+
+1. Use session-aware load balancer
+2. Store session data in distributed cache, like Redis or Memcache
+
