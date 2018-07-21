@@ -377,6 +377,7 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 
 ## OAuth 2.0 work flow (rfc6749)
 
+``` text
 +--------+                               +---------------+
 |        |--(A)- Authorization Request ->|   Resource    |
 |        |                               |     Owner     |
@@ -394,4 +395,5 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 |        |                               |     Server    |
 |        |<-(F)--- Protected Resource ---|               |
 +--------+                               +---------------+
+```
 
