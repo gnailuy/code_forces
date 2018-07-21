@@ -370,3 +370,8 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 1. Use session-aware load balancer
 2. Store session data in distributed cache, like Redis or Memcache
 
+## JIT
+
+1. Java Runtime 使用 JIT 将频繁被执行的字节码编译为执行更快的机器码，从而优化运行速度
+2. Python 的 PyPy 也有一个 JIT，所以比 CPython 快很多
+
