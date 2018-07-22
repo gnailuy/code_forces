@@ -311,6 +311,7 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 
 ## HTTP and RPC
 
+* Netty
 * RESTful
 * gRPC
 
@@ -397,7 +398,18 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 +--------+                               +---------------+
 ```
 
-## volatile
+## Java 并发编程
 
-禁止指令重排优化，保证变量值变化时所有线程都立即可见
+1. synchronized 重量级锁，通过占用 monitor 来实现，依赖操作系统 Mutex，需要切换内核态
+2. CAS(Compare And Swap): 修改之前先判断值是否改变
+3. 偏向锁，只有本线程占用对象时，直接执行同步区域，有线程竞争时则撤销偏向，使用轻量级锁尝试锁定
+4. 轻量级锁，尝试用 CAS 方法占用对象，成功的情况下先使用轻量级锁，失败时则膨胀为重量级锁
+5. 自旋锁，用短时的忙等待期待资源迅速被释放，自旋次数根据自旋成功与否自适应改变
+6. 循环 wait()，防止被无效唤醒，修改了数据之后要 notify() 或 notifyAll() 唤醒其他线程
+7. volatile: 禁止指令重排优化，保证变量值变化时所有线程都立即可见
+
+## 并发模型
+
+1. Delegator + Workers 模式：Worker 以 Blocking 的方式运行，需等待 IO，Worker 线程遇到慢 IO 时可能被耗光
+2. Reactor + Channel 模式：Worker 以 Non-blocking 模式运行，遇到 IO 注册 IO 完成事件，然后交出控制权回到线程池
 
