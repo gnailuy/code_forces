@@ -413,3 +413,14 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 1. Delegator + Workers 模式：Worker 以 Blocking 的方式运行，需等待 IO，Worker 线程遇到慢 IO 时可能被耗光
 2. Reactor + Channel 模式：Worker 以 Non-blocking 模式运行，遇到 IO 注册 IO 完成事件，然后交出控制权回到线程池
 
+## TCP handshake
+
+``` text
+    TCP A                                                 TCP B
+1.  CLOSED                                                LISTEN
+2.  SYN-SENT    --> <SEQ=100><CTL=SYN>                --> SYN-RECEIVED
+3.  ESTABLISHED <-- <SEQ=300><ACK=101><CTL=SYN,ACK>   <-- SYN-RECEIVED
+4.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK>       --> ESTABLISHED
+5.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK><DATA> --> ESTABLISHED
+```
+
