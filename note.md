@@ -291,6 +291,16 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 * CAP: Consistency, Availability, Partition Tolerance
 * BASE: Base Available, Soft-state, Eventually Consistence
 
+### DB Storage
+
+* B-Tree
+* LSM-Tree: 数据 Append 到磁盘 SSTable，并且写 WAL，然后更新内存 MemTable，MemTable 定期固化，通过 compact 操作合并 WAL
+
+### Sharding
+
+* Consistent Hashing: Key 的哈希范围看作环，均匀部署 Sharding 边界，在节点增删失效时，尽量保持节点距离均匀
+* 每个 Shard 多个节点，如果考虑 Consistency，那么对多个 Shard 节点的读写需要经过同一的 Master 节点，或者有类似 ZK 的一致性机制
+
 ## Queue
 
 * Kafka
@@ -319,6 +329,8 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 
 * Redis
 * Memcache
+* 写入策略：Write Through (同时写), Write Back (写 Cache 然后刷回 DB), Write Around (写 DB)
+* 替换策略：LRU
 
 ## Moniting and Logging
 
@@ -352,7 +364,7 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 1. EC2: node with web stack
 2. Route 53: DNS Service
 3. RDS: Relational Database Service
-4. DynamoDB: NoSQL Service
+4. DynamoDB: NoSQL KV Service
 5. Redshift: Data Warehouse
 6. ELB: Load Balance
 7. CloudFront: CDN
@@ -412,6 +424,13 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 
 1. Delegator + Workers 模式：Worker 以 Blocking 的方式运行，需等待 IO，Worker 线程遇到慢 IO 时可能被耗光
 2. Reactor + Channel 模式：Worker 以 Non-blocking 模式运行，遇到 IO 注册 IO 完成事件，然后交出控制权回到线程池
+
+## 负载均衡和反向代理
+
+1. DNS Round Robin (rarely used)
+2. L3/L4 Layer (TCP/IP)
+3. L7 Layer (Application layer, e.g. HTTP)
+4. 服务端通过 Reverse Proxy 将后端 API 整合到统一的出口
 
 ## TCP handshake
 
