@@ -469,3 +469,13 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 5.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK><DATA> --> ESTABLISHED
 ```
 
+# Hadoop and Spark Review
+
+1. reduce() 接受一个函数，参数是两个 RDD 中的元素，返回和参数同类型的聚合值
+2. fold() 多接受一个零值，函数将 RDD 里的值和零值合并
+3. aggregate() 又多接受一个函数，一个函数负责零值和 RDD 元素的合并，另一个函数负责两个 RDD 元素的合并，因此零值类型可以和元素类型不同
+4. map() 是个 transformation，它的函数将每个元素进行一个转换并返回新元素，而 foreach() 是个 action，它不返回新 RDD，函数主要是 Side effect
+5. countByValue() 类似于 bash 的 uniq -c
+6. 主要集合操作 union(), intercection(), substract(), cartesian()
+7. 主要 KV RDD 相交操作 join(), left(right)OuterJoin(), cogroup()
+
