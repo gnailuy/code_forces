@@ -477,5 +477,11 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 4. map() 是个 transformation，它的函数将每个元素进行一个转换并返回新元素，而 foreach() 是个 action，它不返回新 RDD，函数主要是 Side effect
 5. countByValue() 类似于 bash 的 uniq -c
 6. 主要集合操作 union(), intercection(), substract(), cartesian()
-7. 主要 KV RDD 相交操作 join(), left(right)OuterJoin(), cogroup()
+7. reduceByKey() 用于将 Pair RDD 按照 Key 进行 reduce；类似的 groupByKey() 按 Key 聚合成集合；foldByKey() 按 Key 来 fold()
+8. combineByKey() 和 aggregate 类似，按照 Key 进行元素合并，首先在分区内提供将元素映射成累加值，以及累加值和元素合并两个方法，分区间提供累加值互相合并的方法
+9. mapValues() 相当于 map() 只修改 Value；flatMapValues() 和 flatMap() 类似，都将传入的 Value 转换成 Iterable
+10. 主要 KV RDD 相交操作 join(), left(right)OuterJoin(), cogroup()
+11. cogroup() 将两个 Pair RDD 按照 Key 合并，每个 Key 对应两个 Iterable，分别是原 RDD 的元素集合，join() 基于它实现
+12. mapPartitions(WithIndex)() 和 foreachPartitions() 分别都在分区内进行循环
+13. pipe() 用来和外部脚本、程序进行对接
 
