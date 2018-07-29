@@ -445,11 +445,13 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 5. 自旋锁，用短时的忙等待期待资源迅速被释放，自旋次数根据自旋成功与否自适应改变
 6. 循环 wait()，防止被无效唤醒，修改了数据之后要 notify() 或 notifyAll() 唤醒其他线程
 7. volatile: 禁止指令重排优化，保证变量值变化时所有线程都立即可见
+8. 实现 singleton 的一个方案，利用静态子类来持有 singleton 对象，getInstance() 返回子类的静态 instance 对象，ClassLoader 保证了对象唯一性，又是线程安全的，避免了同步代码
 
 ## 并发模型
 
 1. Delegator + Workers 模式：Worker 以 Blocking 的方式运行，需等待 IO，Worker 线程遇到慢 IO 时可能被耗光
 2. Reactor + Channel 模式：Worker 以 Non-blocking 模式运行，遇到 IO 注册 IO 完成事件，然后交出控制权回到线程池
+3. Java NIO 中 Selector 监听一堆 Channel，Channel 读数据到 Buffer，Channel Ready 后可以交给 Thread 来处理
 
 ## 负载均衡和反向代理
 
