@@ -388,6 +388,13 @@ D       G      B
 
 # Design Note
 
+## Java
+
+Encapsulation: Hiding implementation
+Abstraction: Using class/interface instead of implementation to interact
+Inheritance: "is a" relationship; reuse code
+Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpism
+
 ## Realtime Chat
 
 1. 客户端使用 Ajax、Comet 等轮询，或者使用 WebSocket 实现双工通信，Server-Sent Events 可以不考虑
