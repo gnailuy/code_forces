@@ -395,10 +395,63 @@ D       G      B
 
 ## Java
 
+### OOP
+
 Encapsulation: Hiding implementation
 Abstraction: Using class/interface instead of implementation to interact
 Inheritance: "is a" relationship; reuse code
 Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpism
+
+### The language
+
+* Write once, run anywhere; JVM; bytecode; JIT Compiler; Mixed Mode
+* Generic Typing
+* GC: SerialGC, ParallelGC, CMS, G1
+
+### Exception and Error
+
+* They both are extend from Throwable
+* Exceptions are meant to be catched by the programmer
+* Errors are fatal, they usually means a program crash: OOMError, StackOverflowError
+* Checked Exceptions and Unchecked Exceptions: Checked/Not Checked at compile time
+* Checked Exception: IOException
+* Unchecked Exception: NullPointerException, RuntimeException
+* Exceptions are side effects
+
+### Reference Type
+
+* Strong Reference: Object is directly referenced from one or more Threads
+* SoftReference: JVM will clear SoftReferenced Objects before throwing an OOMError, a good way to implement Cache
+* WeakReference: JVM will clear WeakReferenced Objects by GC
+* PhantomReference: PhantomReferenced Objects will be enqueue to a ReferenceQueue, user can schedule follow-up cleanup actions
+
+### String, StringBuffer, StringBuilder
+
+* Java String is immutable
+* StringBuffer is thread safe
+* StringBuilder is not thread safe, but faster
+
+### Wrapper 类型
+
+* 基础数据类型 short int long double float char boolean byte 八个
+* 对应都有 Wrapper 类型，Java 提供了 boxing 和 unboxing 的功能，自动转换
+* 鉴于程序中常用的数字范围有些，valueOf() 方法是有缓存的，使得 Wrapper 类型使用更高效
+
+### 反射
+
+* 在运行时动态获得对象类型，可以用于实现动态代理、插件机制等，例如动态加载第三方对象
+* 动态代理：运行时为对象创建代理对象，用代理对象来操作原对象的方法，代理对象中可以实现通用操作，如日志、安全、资源释放等
+
+### Java 排序
+
+* Arrays.sort() 在 primitive type 上用的是三路 QuickSort
+* 在对象类型上用的是归并排序，结合小数组上的插入排序，保证排序稳定
+
+### Vector, ArrayList, LinkedList
+
+* Vector 是线程安全的，底层是数组，自动扩容策略是翻倍
+* ArrayList 类似 Vector，但线程不安全，性能好，自动扩容是翻 50%
+* LinkedList 也线程不安全，底层是双向链表
 
 ## Realtime Chat
 
