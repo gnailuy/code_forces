@@ -20,6 +20,12 @@ Dijkstra's Double Stack: 一个操作符栈，一个操作数栈，可转后缀�
 
 开一个新链表头，模拟旧链表出栈新链表入栈；可以用递归
 
+## 松散链表
+
+1. 链表节点保存一个数组，而不是单个元素
+2. 插入时，若数组已满，则 Split 成两个，各占原来一半元素
+3. 删除时，若节点数少于一半，则尝试从相邻节点借一些节点过来，若相邻节点也小于一半元素，则合并
+
 ## Intersection of two Linked Lists
 
 如果有交叉，那么交叉点之后两个链表就是同一个链表了，长度肯定一样，所以需要两个指针按照剩余长度相同的步调往后查找
@@ -121,7 +127,8 @@ D       G      B
 
 ## Shuffle 的一个简单实现
 
-从数组开头开始，对于第 i 个元素，都和 i(含) 之后的一个随机元素互换位置
+1. 从数组开头开始，对于第 i 个元素，都和 i(含) 之后的一个随机元素互换位置
+2. 实现起来，从数组最后一个元素 i 开始，和 0~i(含) 之间的随机元素互换位置，比较容易写生成随机数的代码
 
 ## 8 Puzzle
 
@@ -431,6 +438,14 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * StringBuffer is thread safe
 * StringBuilder is not thread safe, but faster
 
+### HashTable, HashMap, TreeMap
+
+* HashTable 比较老，线程安全，速度慢，和 HashMap 类似
+* HashMap 是 Bucket + 链表的模式，Bucket 根据 load factor 来自动扩容和 Rehash，链表在过长时会变成树
+* LinkedHashMap 是双向链表加哈希，可以实现按照插入顺序遍历，实现 Cache 很方便
+* TreeMap 基于 RedBlackTree 实现，可以按照自然大小顺序遍历
+* PriorityQueue 也可以按自然大小顺序遍历，基于 Heap 实现
+
 ### Wrapper 类型
 
 * 基础数据类型 short int long double float char boolean byte 八个
@@ -531,11 +546,23 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 7. volatile: 禁止指令重排优化，保证变量值变化时所有线程都立即可见
 8. 实现 singleton 的一个方案，利用静态子类来持有 singleton 对象，getInstance() 返回子类的静态 instance 对象，ClassLoader 保证了对象唯一性，又是线程安全的，避免了同步代码
 
-## 并发模型
+## Java 并发库
 
-1. Delegator + Workers 模式：Worker 以 Blocking 的方式运行，需等待 IO，Worker 线程遇到慢 IO 时可能被耗光
-2. Reactor + Channel 模式：Worker 以 Non-blocking 模式运行，遇到 IO 注册 IO 完成事件，然后交出控制权回到线程池
-3. Java NIO 中 Selector 监听一堆 Channel，Channel 读数据到 Buffer，Channel Ready 后可以交给 Thread 来处理
+* 老的同步容器，读写全部同步: HashTable, Vector, Stack
+* 同步 Wrapper，对象级锁: SynchronizedMap: Map\<String, String> synchronizedHashMap = Collections.synchronizedMap(new HashMap\<String, String>());
+* 并发容器，提供分 Segment 的锁，Java 8 升级为 Bucket 锁: ConcurrentHashMap, CopyOnWriteArrayList
+* 线程安全队列: ArrayBlockingQueue, SynchronousQueue
+
+## IO 和并发模型
+
+1. 传统同步 IO，InputStream/OutputStream 抽象了字节流，Reader/Writer 则加上了字符编码解码能力，Buffered Stream 增加了缓冲区
+2. Java NIO 中 Selector 监听一堆 Channel，例如 SocketChannel，Channel 把数据读到 Buffer，Channel Ready 后交给 Thread 来处理
+3. NIO2 支持 Callback 方式的异步 IO，为 Channel 注册 Handler，IO 事件完成后回调 Handler
+4. NIO 提供的 Channel 之间 transferTo() 的方法，利用了操作系统 Zero Copy 技术，无需把内核缓冲区数据拷贝回用户缓冲区，比 I/OStream 对拷效率高
+5. DirectByteBuffer 利用堆外内存，可以保存生命周期较长的对象，可以用于 Zero Copy IO，可以规避 GC 暂停，这些内存通过 PhantomReference 和 Cleaner 机制回收
+
+* Delegator + Workers 模式：Worker 以 Blocking 的方式运行，需等待 IO，Worker 线程遇到慢 IO 时可能被耗光
+* Reactor + Channel 模式：Worker 以 Non-blocking 模式运行，遇到 IO 注册 IO 完成事件，然后交出控制权回到线程池
 
 ## 负载均衡和反向代理
 
