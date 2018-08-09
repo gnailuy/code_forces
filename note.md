@@ -378,7 +378,7 @@ D       G      B
 * Redis
 * Memcache
 * 写入策略：Write Through (同时写), Write Back (写 Cache 然后刷回 DB), Write Around (写 DB)
-* 替换策略：LRU
+* 替换策略：LRU, LFU (Frequency)
 
 ## Moniting and Logging
 
