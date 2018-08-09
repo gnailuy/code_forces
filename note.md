@@ -369,7 +369,7 @@ D       G      B
 
 ## HTTP and RPC
 
-* Netty
+* Netty: Bootstrape, EventLoopGroup, Channel, Handler; Reactor, EventLoop, ZeroCopy, JNI
 * RESTful
 * gRPC
 
@@ -398,6 +398,36 @@ D       G      B
 
 * https://gist.github.com/jboner/2841832
 
+## Design Pattern
+
+### 创建型模式
+
+是对对象创建过程的各种问题和解决方案的总结
+
+1. Factory, AbstractFactory, 对于构造复杂对象，使用复杂的构造函数不好用，用工厂类来提供不同的创建方法、传入创建参数
+2. Singleton, 单例，可以在 getInstance() 里 Lazy 创建实例，需要注意线程安全
+3. Builder, 通过创建一个 Builder 类来创建对象，Builder 类提供一系列的 set 方法，修改要创建的对象参数
+
+### 结构型模式
+
+是针对软件设计结构的总结，关注于类、对象继承、组合方式
+
+1. Adapter, 创建一个新的类，提供新的 API，但内部调用老的类的 API，用于新接口访问旧对象
+2. Decorator, 例如 InputStream，可以包装成 FileInputStream, BufferedInputStream 等
+3. Proxy
+4. Bridge
+5. Composite
+
+### 行为型模式
+
+是从类或对象之间交互、职责划分等角度总结的模式
+
+1. Strategy, 不同类型的请求，在运行时选择用不同的策略或算法去应对
+2. Iterator, 创建一个 Iterator 来 traverse 一个容器
+3. Observer, 提供一个共用接口被调用，来观察 Runtime 情况
+4. Command
+5. Interpreter
+
 # Design Note
 
 ## Java
@@ -413,7 +443,8 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 
 * Write once, run anywhere; JVM; bytecode; JIT Compiler; Mixed Mode
 * Generic Typing
-* GC: SerialGC, ParallelGC, CMS, G1
+* Thread Stack, Heap, Method Area, Constant Pool, Native Stack
+* GC: SerialGC, ParNewGC, CMS, ParrallelGC, G1
 
 ### Exception and Error
 
@@ -535,9 +566,9 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 +--------+                               +---------------+
 ```
 
-## Java 并发编程
+## Java 并发编程 (synchronized and Lock)
 
-1. synchronized 重量级锁，通过占用 monitor 来实现，依赖操作系统 Mutex，需要切换内核态
+1. 重量级锁，通过占用 monitor 来实现，依赖操作系统 Mutex，需要切换内核态
 2. CAS(Compare And Swap): 修改之前先判断值是否改变
 3. 偏向锁，只有本线程占用对象时，直接执行同步区域，有线程竞争时则撤销偏向，使用轻量级锁尝试锁定
 4. 轻量级锁，尝试用 CAS 方法占用对象，成功的情况下先使用轻量级锁，失败时则膨胀为重量级锁
