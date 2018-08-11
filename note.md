@@ -2,11 +2,11 @@
 
 ## GCD
 
-Euclid's Algorithm: 循环大数除小数
+Euclid's Algorithm: 大数除小数；小数变大数，余数为新的小数；循环至小数变零，大数即为 GCD
 
 ## SQRT
 
-Newton's Method: 循环 xNew = ( xOld + x/xOld )/2，直至 xOld 和 x/xOld 相差小于阈值
+Newton's Method: 循环 k = (k + x/k)/2，直至 k 和 x/k 相差小于阈值，k 即为 sqrt(x) 的近似值
 
 ## Arithmetic Expression (((2 - 5) + 1) * 2)
 
