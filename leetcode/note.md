@@ -66,4 +66,5 @@ UTF-8 是变长编码，包括：0 开头的 8 位码，110 开头的 8 位码 +
 * Window Minimum: 给定窗口大小 K，在数组上从左至右滑动，求每一步窗口内最小值：使用一个 Deque 保存窗口元素索引，每次右移从左端删掉元素，并且从右端删掉比当前元素大的所有元素，再把当前元素从右边入队列
 * 给定一个数组，寻找 slice 中三元素及以上的 arithmetic sequence，对于一个三元素的 slice，找齐所有后续合法的元素计数，然后从最后一个元素重新开始 scan
 * Largest Rectangular Area in a Histogram: 普通 O(n^2) 方法暴力；通过区间最低 Bar Divide and Conquer O(nlogn) 方法；一个 O(n) 方法，使用栈依次压入每个 Bar，当遇到比前一个 Bar 小的 Bar，就从前一个 Bar 开始出栈，每次计算以出栈 Bar 为最低点的区域大小；
+* Polite Number: 给定一个数，求把这个数表示为连续整数之和的方法：1. 暴力法；2. 滑动窗口法；3. 还有一个利用因式分解的方法，网上有证明
 
