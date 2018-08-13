@@ -2,16 +2,6 @@
 
 import java.util.LinkedList;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) {
-        val = x;
-        left = right = null;
-    }
-}
-
 class ValidBinarySearchTree {
     public int max(TreeNode root) {
         if (null == root.right) {

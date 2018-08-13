@@ -3,16 +3,6 @@
 import java.util.List;
 import java.util.LinkedList;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) {
-        val = x;
-        left = right = null;
-    }
-}
-
 class BTLevelOrderTraversal {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> lo = new LinkedList<List<Integer>>();

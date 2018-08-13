@@ -3,13 +3,6 @@
 import java.util.LinkedList;
 import java.util.List;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
-
 public class BinaryTreeInorderTraversal {
     public void inorderHelper(TreeNode root, List<Integer> out) {
         if (null == root) return;

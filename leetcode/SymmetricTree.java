@@ -2,16 +2,6 @@
 
 import java.util.LinkedList;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) {
-        val = x;
-        left = right = null;
-    }
-}
-
 class SymmetricTree {
     public boolean equalNode(TreeNode a, TreeNode b) {
         if (null == a && null == b) {
