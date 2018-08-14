@@ -345,7 +345,8 @@ D       G      B
 * Search: Elastic
 * Graph DB: Neo4j
 * ACID: Atomicity, Consistency, Isolation, Durability
-* CAP: Consistency, Availability, Partition Tolerance
+* CAP: Consistency, Availability, Partition Tolerance (CP: Zookeeper; AP: DynamoDB; 网络是不稳定的，网络中断导致分区是不可避免的)
+* Paxos
 * BASE: Base Available, Soft-state, Eventually Consistence
 
 ### DB Storage
@@ -356,6 +357,7 @@ D       G      B
 ### Sharding
 
 * Consistent Hashing: Key 的哈希范围看作环，均匀部署 Sharding 边界，在节点增删失效时，尽量保持节点距离均匀
+* Consistent Hashing: 一个实现：根据 Node 名字的 Hash 决定 Node 位置，Node 按 Hash 存在一个 TreeMap 里面，发请求时，根据 Key 的 Hash 找到 TreeMap.tailMap() 中最近的 Node
 * 每个 Shard 多个节点，如果考虑 Consistency，那么对多个 Shard 节点的读写需要经过同一的 Master 节点，或者有类似 ZK 的一致性机制
 
 ## Queue
@@ -402,6 +404,8 @@ D       G      B
 * Asynchronous
 * Locking
 * Resource Decouple
+* Cache Coherence: 缓存一致性模型通常对程序员透明，它指的是多核情况下，每个核的 L1 缓存一致性，Write Through 情况下，每个核的 L1 之间要有通知机制，使得其他核知道缓存失效，Write Back 的情况下也是如此，但还要保证数据写回共享缓存或者主存之后才能读，通过写之前标记内存状态来实现
+* Memory Consistency: 内存一致性模型主要是为了保证多核情况下读写内存的一致性，程序员的角度看，可以通过原子操作来，如加锁
 
 ## Performance
 
