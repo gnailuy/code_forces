@@ -458,6 +458,7 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * Generic Typing
 * Thread Stack, Heap, Method Area, Constant Pool, Native Stack
 * GC: SerialGC, ParNewGC, CMS, ParrallelGC, G1
+* public enum Day {SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY}
 
 ### Exception and Error
 
@@ -641,4 +642,41 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 11. cogroup() 将两个 Pair RDD 按照 Key 合并，每个 Key 对应两个 Iterable，分别是原 RDD 的元素集合，join() 基于它实现
 12. mapPartitions(WithIndex)() 和 foreachPartitions() 分别都在分区内进行循环
 13. pipe() 用来和外部脚本、程序进行对接
+
+# OOD Examples
+
+1. Handling Ambiguity: Question Type (OOD, System Design, Algorithm)
+2. Systematic Approach: Clarify Details: Objective, Users, Use Cases, Scale, etc.
+3. Core Objects: Application, Controller, Objects, Entity
+
+## Poker Card
+
+public class Player: A Strategy, A Hand, getCard
+public class Hand: An Array of Card
+public class Card: CardType (), CardValue
+public class Deck: 一副牌, shuffle, getNext
+public class Shoe: An Array of Deck, shuffle, getNext
+
+## Parkinglot
+
+abstract class Vehicle: LicensePlate, extends to Motocycle, Car, Truck, Bus
+public class Car: size, spot, getSpot(), parkIn(), moveOut()
+public class Spot(long id, enum Size): id, size, vehicle, park(), clear(), isAvailable()
+public class Parkinglot: availableSpots, findSpot(), parkVehicle(), removeVehicle()
+Level (多层停车)
+
+## ATM
+
+Objects: User, Operator (Start, Shutdown, AddCash), Bank (Backend), Logger
+Controller: Session (用户插卡，验证身份，密码多次错误等情况), Transaction (Inquiry, Withdrawal, Deposit, Transfer)
+Entity: Card, Receipt, Balance
+
+## Vending Machine
+
+VendingMachine: Interface (newSession(), reset(), addItem(), removeItem(), insertCoin(), collectItemAndChange())
+VendingMachineImpl implements VendingMachine: (Inventory<Item> Inventory<Coin>, Inventory<BankNote>, currentItemList, currentPrice, currentBalance)
+VendingMachineFactory: createVendingMachine()
+Item: name, price
+Inventory: A map of item/coin/banknote to count
+Coin and BankNote: enum public enum Coin{PENNY(1), NICKLE(5), DIME(10), QUARTER(25);}
 
