@@ -529,6 +529,10 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 3. Sharding 方案要考虑的比较多，数据库按照用户分区，这样获取一个用户的 Feed 就涉及到跨分区读和合并；
 4. 可以在按用户分 Sharding 的基础上，加一层缓存 Layer，缓存用一个大的环形队列+SymbolTable 来做，可以从中获取最新推文；
 
+## 分布式 ID 服务
+
+1. Twitter Snowflake: timestamp + worker number(节点启动时从ZK读取) + sequence number(节点自己生成)
+
 ## Amazon Large Scale
 
 1. EC2: node with web stack
