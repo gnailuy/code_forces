@@ -413,7 +413,9 @@ D       G      B
 
 ## Design Pattern
 
-### 创建型模式
+A Good Resource: https://sourcemaking.com/design_patterns
+
+### 创建型模式 Creational Design Pattern
 
 是对对象创建过程的各种问题和解决方案的总结
 
@@ -421,7 +423,7 @@ D       G      B
 2. Singleton, 单例，可以在 getInstance() 里 Lazy 创建实例，需要注意线程安全
 3. Builder, 通过创建一个 Builder 类来创建对象，Builder 类提供一系列的 set 方法，修改要创建的对象参数
 
-### 结构型模式
+### 结构型模式 Structural Design Pattern
 
 是针对软件设计结构的总结，关注于类、对象继承、组合方式
 
@@ -431,7 +433,7 @@ D       G      B
 4. Bridge
 5. Composite
 
-### 行为型模式
+### 行为型模式 Behavioral Design Pattern
 
 是从类或对象之间交互、职责划分等角度总结的模式
 
