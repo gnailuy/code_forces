@@ -440,8 +440,7 @@ A Good Resource: https://sourcemaking.com/design_patterns
 1. Strategy, 不同类型的请求，在运行时选择用不同的策略或算法去应对
 2. Iterator, 创建一个 Iterator 来 traverse 一个容器
 3. Observer, 提供一个共用接口被调用，来观察 Runtime 情况
-4. Command
-5. Interpreter
+4. Chain of Responsibility, 多个 Handler 串联，请求如果不是自己的责任，则调用 successor 来处理
 
 # Design Note
 
