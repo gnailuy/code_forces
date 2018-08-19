@@ -6,7 +6,7 @@ Euclid's Algorithm: 大数除小数；小数变大数，余数为新的小数；
 
 ## SQRT
 
-Newton's Method: 循环 k = (k + x/k)/2，直至 k 和 x/k 相差小于阈值，k 即为 sqrt(x) 的近似值
+Newton's Method: 循环 k = (k + x/k)/2，直至 k*k 和 x 相差小于阈值，k 即为 sqrt(x) 的近似值，k 初始可以为 1
 
 ## Arithmetic Expression (((2 - 5) + 1) * 2)
 
