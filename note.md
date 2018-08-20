@@ -10,8 +10,10 @@ Newton's Method: 循环 k = (k + x/k)/2，直至 k*k 和 x 相差小于阈值，
 
 ## Arithmetic Expression (((2 - 5) + 1) * 2)
 
-* Dijkstra's Double Stack: 一个操作符栈，一个操作数栈，可转后缀表达式
-* 如果不一定有括号，而且加上乘除，需要考虑操作符优先级，可以通过中缀表达式转逆波兰式来解决
+* Dijkstra's Double Stack: 一个操作符栈，一个操作数栈，遇到右括号则计算，可转后缀表达式
+
+如果不一定有括号，而且加减乘除都有，需要考虑操作符优先级，可以通过中缀表达式转逆波兰式来解决
+
 * 用一个栈来保存操作符，扫描中缀表达式，遇到数字则输出，遇到优先级不高于栈顶的符号，或者遇到右括号，则符号出栈加入表达式，否则符号入栈
 * 逆波兰式求值：用一个栈从左到右扫，遇到数字入栈，遇到符号出栈计算然后结果入栈
 
@@ -23,7 +25,7 @@ Newton's Method: 循环 k = (k + x/k)/2，直至 k*k 和 x 相差小于阈值，
 
 开一个新链表头，模拟旧链表出栈新链表入栈；可以用递归
 
-## 松散链表
+## Unrolled linked list (松散链表)
 
 1. 链表节点保存一个数组，而不是单个元素
 2. 插入时，若数组已满，则 Split 成两个，各占原来一半元素
@@ -33,19 +35,47 @@ Newton's Method: 循环 k = (k + x/k)/2，直至 k*k 和 x 相差小于阈值，
 
 如果有交叉，那么交叉点之后两个链表就是同一个链表了，长度肯定一样，所以需要两个指针按照剩余长度相同的步调往后查找
 
+## Loop in Linked List
+
+* 用一个 HashSet 标记 visited
+
+单链表快慢指针，一个每次移动一步，一个每次移动两步
+
+* 用于找到中间点
+* 用于环检测，如果有环，则 fast 和 slow 最终会相遇
+* 如果检测到有环，可以从 head 和 slow/fast 分别单步，最终相遇在环所在的点
+* 另一个办法是先测量环的长度，同时派一个指针 p 从 head 往前走环长度，然后再一个指针 q 从头和 p 一起前进，相遇在环所在点
+
+## Permutation (全排列)
+
+* 递归参数 List<Item> prefix, Set<items> set, List<List<Item>> result
+* 如果 set 空了，则将当前 prefix 拷贝一份加入 result
+* 否则循环 set 中的元素，每次取出这个元素加入 prefix，递归调用，递归结束之后再把元素从 prefix 取出，加回 set
+* 如果元素是数组，可以用 Backtracking 循环把每个元素交换到当前递归的投一位，然后递归调用后面部分，递归完成后复位
+* 如果是字符全排列，prefix 可以是字符串，字符串粘贴就不用复制了，但是用 StringBuilder Backtracking 可能会快一点
+
 ## 第 K 个全排列
 
 Hint: 例如 1234 四个数的排列，1 开头的话，234 总共六个排列法，K 如果是 1~6 就是 1 开头，7~12 就是 2 开头
 
-## 调和级数
+## Combination (生成组合)
+
+* 把元素放在一个数组里面，从头开始考虑，每考虑一个元素，递归后面剩余元素，然后输出带该元素和不带该元素两种组合；
+* 把元素放在数组里面，然后取一个整数从 0 开始加一，每次对应位为 1 则取该元素，对应位位 0 则不取；
+
+## Harmonic series (调和级数)
 
 1 + 1/2 + 1/3 + ... + 1/N ~ lnN
 
-## 斯特灵估计
+* Binary Search 符合这个规律
 
-lgN! ~ NlgN: 该估计从斯特灵公式得来
+## Stirling's approximation (斯特灵估计)
 
-## 二项式系数
+lgN! = lg1+lg2+lg3+...+lgN ~ NlgN
+
+* 该估计从斯特灵公式得来
+
+## Binomial coefficient (二项式系数)
 
 当 k 相对小时 C(N, k) ~ N^k/k!，其中 N(N-1)(N-2)...(N-k+1) ~ N^k
 
@@ -64,8 +94,8 @@ lgN! ~ NlgN: 该估计从斯特灵公式得来
 
 1. Grey Code 编码的相邻两个数之间只有一位不同
 2. G = B XOR (B>>1)
-3. 或者 G(n) = B(n+1) + B(n) 从低位到高位
-4. 或者 B(n) = B(n+1) - G(n) 从高位到低位
+3. 或者 G(n) = B(n-1) XOR B(n) 从左到右, B(-1) = 0
+4. 或者 B(0) = G(0); B(n) = B(n-1) XOR G(n) 从左到右
 
 ``` text
 D       G      B
@@ -103,7 +133,7 @@ D       G      B
 ## QuickSort
 
 1. 和 MergeSort 相比：前者先按照参考值把数组划分成两部分，然后递归排序两部分；后者先对半划分，然后递归排序两部分，最后合并两部分
-2. QuickSort 的最优情况是每次参考值恰好把数组对半分
+2. QuickSort 的最优情况是每次参考值恰好把数组对半分，普通情况下，先进行一次 Shuffle 来防止出现最差情况
 3. 优化：长度小的数组用插入排序，或忽略小数组，最后统一插入排序一次
 4. 优化：每次选取一个小样本，用样本中值作为参考值
 5. 优化：对于存在大量重复 Key 的情况，可以三路分区，选取参考值后，将数组分为小于、等于、大于三部分；3-Way QuickSort 通常是排序库函数实现
@@ -117,12 +147,12 @@ D       G      B
 4. 否则如果 j 小于 K，在 j+1 及之后的数组上重复算法
 5. 如果 j 大于 K，在开头到 j-1 的数组上重复算法
 
-## 稳定性
+## Stability 稳定性
 
 1. 插入排序和归并排序是稳定的，选择、希尔、快速、堆排序是不稳定的
 2. 比较元素时先比较值，再比较其 index，可以把不稳定排序变成稳定排序
 
-## PQ and Heap Sort
+## Priority Queue and Heap Sort
 
 1. 用数组表示的完全二叉树实现大顶、小顶堆，从下标 1 开始存数据编码方便很多，实现优先队列 PQ 很方便
 2. Index PQ 实现 N 路 stream 归并：用大小为 N 的 PQ，每一路 stream 存一个元素进来，每次输出堆顶元素之后，再从对应 stream 里读新元素进来
@@ -133,7 +163,7 @@ D       G      B
 1. 从数组开头开始，对于第 i 个元素，都和 i(含) 之后的一个随机元素互换位置
 2. 实现起来，从数组最后一个元素 i 开始，和 0~i(含) 之间的随机元素互换位置，比较容易写生成随机数的代码
 
-## 水库抽样 Reservoir Sampling
+## Reservoir Sampling 水库抽样
 
 1. 大量元素随机抽取 K 个，首先把前 K 个元素加入大小为 K 的数组
 2. 然后从 K+1 个元素开始循环，对于第 i 个元素，生成一个 1~i 之间的随机数 j
@@ -148,7 +178,7 @@ D       G      B
 
 ## Boggle backtracking
 
-1. 遍历一个 N\*N 字符数组，每次可上下左右斜线走一步
+1. 遍历一个 N*N 字符数组，每次可上下左右斜线走一步
 2. 递归深度遍历，循环每一步可选的邻居节点，循环内递归调用，递归调用之后回退，继续循环
 
 ## Binary Search Tree
@@ -194,13 +224,13 @@ D       G      B
 3. 遍历过程中遇到已经 onStack 的点，则说明有环
 4. 如果要返回具体环的路径，则记录一个 edgeTo 数组，追踪当前点是从那里指向来的，检测到环时按照 edgeTo 恢复路径
 
-### 有向图拓扑排序
+### Topological sort of DAG (Directed Acyclic Graph) 有向无环图拓扑排序
 
 1. 深度优先遍历，从任意节点开始遍历都可以
 2. 在递归调用之后将节点 push 进一个 stack(先递归调用，后 push 节点)
 3. 最后弹出 stack 即为拓扑排序的一个结果
 
-### 有向图强连通检测
+### Strong Components 有向图强连通区域检测
 
 1. 首先，在 Reverse 图上找一个拓扑排序顺序；然后，按照该顺序进行深度优先遍历，遍历可达点均为联通区域
 2. Reverse 图上面的拓扑排序中，若 v 排在 w 后面，则说明在原图中 v 到 w 可达，而如果从 w 开始深度遍历访问到了 v，则 v 和 w 就一定位于同一个强连通区域里
@@ -228,7 +258,7 @@ D       G      B
 2. 直至选够节点数 V-1 个边位置
 3. 其中构成环判断可以用 Union-Find 算法
 
-### 二分图
+### Bipartite Graph 二分图
 
 1. 一个图为二分图，则可以将所有顶点集合 V 分割为两个子集 A 和 B，使得所有边都满足一个顶点在 A，一个顶点在 B
 2. 判断二分图，可以用染色法，从任意顶点开始搜索路径，交替染两种颜色，如果最后成功遍历全图，则是二分图，否则会遇到染色矛盾
@@ -239,13 +269,13 @@ D       G      B
 
 1. 遍历对 Key 计数生成 cnt[]
 2. 通过 cnt[i] += cnt[i-1] 计算每个 Key 的起始点
-3. 遍历，根据起始点放置元素
-4. 按原有元素顺序拷贝回原数组，实现排序
+3. 开辟一个新数组，遍历原有元素，根据起始点将元素拷贝到新数组，放置一个元素后对应的 cnt++
+4. 将新数组拷贝回原数组，实现排序
 
 ## 等长字符串排序
 
 1. 字符串长度为 K，则从右到左做 K 次 Key-Indexed Counting 排序
-2. 因为 Key-Indexed Counting 排序是稳定的，所以可行
+2. 因为 Key-Indexed Counting 排序是稳定的，所以最终结果也是排序的
 
 ## 任意字符串排序
 
@@ -256,7 +286,7 @@ D       G      B
 ## Trie
 
 1. 实现一种字符串为 Key 的 Symbol Table，使用树形结构 Share Key Prefix
-2. 每个节点上的 N(字符集) 维数组指向后继节点，节点有值表示对应的 Key 有 Value
+2. 每个节点上的 N(字符集) 维数组指向后继节点，节点的值表示对应的 Key 有 Value
 
 ## Ternary Search Tries
 
@@ -296,7 +326,7 @@ D       G      B
 ## B-Tree
 
 1. 每个节点有 N 个元素，每个元素为一个指针，指向不大于该元素的子节点
-2. 第一个元素可以用 * 号表示占位符，所有元素都不大于占位符
+2. 第一个元素可以用 * 号表示占位符，所有元素都大于占位符
 
 ## Suffix Array
 
@@ -326,6 +356,7 @@ D       G      B
 * Spark Streaming
 * HBase
 * HDFS
+* Protobuf, Avro, Parquet
 
 ## Database
 
@@ -339,7 +370,7 @@ D       G      B
 
 ### NoSQL DB
 
-* Big Table(Column-based): HBase
+* Big Table (Column-based): HBase
 * Key Value DB: Riak
 * Document DB: MongoDB
 * Search: Elastic
@@ -351,8 +382,8 @@ D       G      B
 
 ### DB Storage
 
-* B-Tree
-* LSM-Tree: 数据 Append 到磁盘 SSTable，并且写 WAL，然后更新内存 MemTable，MemTable 定期固化，通过 compact 操作合并 WAL
+* B-Tree Family: 读优化
+* LSM-Tree: 写优化：数据写 WAL (Write Ahead Log)，同时更新内存 MemTable，MemTable 定期变 Immutable 固化成 SSTable，SSTable 是分层的，通过 compact 操作合并成大文件
 
 ### Sharding
 
@@ -380,7 +411,7 @@ D       G      B
 
 ## HTTP and RPC
 
-* Netty: Bootstrape, EventLoopGroup, Channel, Handler; Reactor, EventLoop, ZeroCopy, JNI
+* Netty: Bootstrap, EventLoopGroup, Channel, Handler; Reactor, EventLoop, ZeroCopy, JNI
 * RESTful
 * gRPC
 
@@ -388,7 +419,7 @@ D       G      B
 
 * Redis
 * Memcache
-* 写入策略：Write Through (同时写), Write Back (写 Cache 然后刷回 DB), Write Around (写 DB)
+* 写入策略：Write Through (同时写), Write Back (写 Cache 然后刷回 DB), Write Around (写 DB 然后 Invalid Cache)
 * 替换策略：LRU, LFU (Frequency)
 
 ## Moniting and Logging
@@ -396,7 +427,6 @@ D       G      B
 * Ganglia/Zabbix
 * Log Rotation
 * Logstash
-* WAL (Write Ahead Log)
 
 ## Concurrency
 
@@ -419,16 +449,16 @@ A Good Resource: https://sourcemaking.com/design_patterns
 
 是对对象创建过程的各种问题和解决方案的总结
 
-1. Factory, AbstractFactory, 对于构造复杂对象，使用复杂的构造函数不好用，用工厂类来提供不同的创建方法、传入创建参数
-2. Singleton, 单例，可以在 getInstance() 里 Lazy 创建实例，需要注意线程安全
-3. Builder, 通过创建一个 Builder 类来创建对象，Builder 类提供一系列的 set 方法，修改要创建的对象参数
+1. Static Factory, Factory Method, Abstract Factory: 构造复杂对象，复杂的构造函数不好用，用工厂类来提供不同的创建方法；简单工厂，工厂接口(多态)，抽象工厂；iterator 创建
+2. Singleton: 单例，可以在 getInstance() 里 Lazy 创建实例，需要注意线程安全
+3. Builder: 通过创建一个 Builder 类来创建对象，Builder 类提供一系列的 set 方法，一步一步来修改要创建的对象参数
 
 ### 结构型模式 Structural Design Pattern
 
 是针对软件设计结构的总结，关注于类、对象继承、组合方式
 
-1. Adapter, 创建一个新的类，提供新的 API，但内部调用老的类的 API，用于新接口访问旧对象
-2. Decorator, 例如 InputStream，可以包装成 FileInputStream, BufferedInputStream 等
+1. Adapter: 创建一个新的类，提供新的 API，但内部调用老的类的 API，用于新接口访问旧对象
+2. Decorator: 例如 InputStream，可以包装成 FileInputStream, BufferedInputStream 等
 3. Proxy
 4. Bridge
 5. Composite
@@ -437,10 +467,10 @@ A Good Resource: https://sourcemaking.com/design_patterns
 
 是从类或对象之间交互、职责划分等角度总结的模式
 
-1. Strategy, 不同类型的请求，在运行时选择用不同的策略或算法去应对
-2. Iterator, 创建一个 Iterator 来 traverse 一个容器
-3. Observer, 提供一个共用接口被调用，来观察 Runtime 情况
-4. Chain of Responsibility, 多个 Handler 串联，请求如果不是自己的责任，则调用 successor 来处理
+1. Strategy: 不同类型的请求，在运行时选择用不同的策略或算法去应对
+2. Iterator: 创建一个 Iterator 来 traverse 一个容器
+3. Observer: 提供一个共用接口被调用，来观察 Runtime 情况
+4. Chain of Responsibility: 多个 Handler 串联，请求如果不是自己的责任，则调用 successor 来处理
 
 # Design Note
 
@@ -449,16 +479,16 @@ A Good Resource: https://sourcemaking.com/design_patterns
 ### OOP
 
 Encapsulation: Hiding implementation
-Abstraction: Using class/interface instead of implementation to interact
+Abstraction: Abstract Data Type; using class/interface instead of implementation to interact
 Inheritance: "is a" relationship; reuse code
 Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpism
 
 ### The language
 
-* Write once, run anywhere; JVM; bytecode; JIT Compiler; Mixed Mode
+* Write once, run anywhere; JVM; bytecode; JIT Compiler; Mixed Mode (自动动态把字节码编译成机器码)
 * Generic Typing
 * Thread Stack, Heap, Method Area, Constant Pool, Native Stack
-* GC: SerialGC, ParNewGC, CMS, ParrallelGC, G1
+* GC: SerialGC, ParNewGC, CMS, ParrallelGC, G1; Young(Eden, Survivor), Old/Tenured, Permanent/Metaspace(Non-heap)
 * public enum Day {SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY}
 
 ### Exception and Error
@@ -477,6 +507,7 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * SoftReference: JVM will clear SoftReferenced Objects before throwing an OOMError, a good way to implement Cache
 * WeakReference: JVM will clear WeakReferenced Objects by GC
 * PhantomReference: PhantomReferenced Objects will be enqueue to a ReferenceQueue, user can schedule follow-up cleanup actions
+* PhantomReference 用于管理和清理堆外内存 Off-heap Memory，如 Directed ByteBuffer
 
 ### String, StringBuffer, StringBuilder
 
@@ -492,11 +523,17 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * TreeMap 基于 RedBlackTree 实现，可以按照自然大小顺序遍历
 * PriorityQueue 也可以按自然大小顺序遍历，基于 Heap 实现
 
+### Vector, ArrayList, LinkedList
+
+* Vector 是线程安全的，底层是数组，自动扩容策略是翻倍
+* ArrayList 类似 Vector，但线程不安全，性能好，自动扩容是翻 50%
+* LinkedList 也线程不安全，底层是双向链表
+
 ### Wrapper 类型
 
 * 基础数据类型 short int long double float char boolean byte 八个
 * 对应都有 Wrapper 类型，Java 提供了 boxing 和 unboxing 的功能，自动转换
-* 鉴于程序中常用的数字范围有些，valueOf() 方法是有缓存的，使得 Wrapper 类型使用更高效
+* 鉴于程序中常用的数字范围有限，valueOf() 方法是有缓存的，使得 Wrapper 类型使用更高效
 
 ### 反射
 
@@ -508,15 +545,9 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * Arrays.sort() 在 primitive type 上用的是三路 QuickSort
 * 在对象类型上用的是归并排序，结合小数组上的插入排序，保证排序稳定
 
-### Vector, ArrayList, LinkedList
-
-* Vector 是线程安全的，底层是数组，自动扩容策略是翻倍
-* ArrayList 类似 Vector，但线程不安全，性能好，自动扩容是翻 50%
-* LinkedList 也线程不安全，底层是双向链表
-
 ## Realtime Chat
 
-1. 客户端使用 Ajax、Comet 等轮询，或者使用 WebSocket 实现双工通信，Server-Sent Events 可以不考虑
+1. 客户端使用 Ajax、Comet 等轮询，或者使用 WebSocket 实现双工通信
 2. 服务器端实现一个用户一个 Channel 队列，Channel 中保存用户接受到的消息
 3. 用户各客户端已读位置保存在服务器端，在线时，拉取新的消息
 4. 用户发送的消息保存在接受方的 Channel 中，由客户端负责解析
@@ -526,13 +557,21 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 ## Twitter 类似服务
 
 1. 客户端主要关注三个写 API：发推、关注、喜欢；一个读 API：获取 Feed 流。其他 API 类似；
-2. 涉及到用户表、推文表、关注关系表和喜欢表；
+2. 涉及到用户表、推文表、关注关系表和喜欢表，可以用关系型数据库；
 3. Sharding 方案要考虑的比较多，数据库按照用户分区，这样获取一个用户的 Feed 就涉及到跨分区读和合并；
 4. 可以在按用户分 Sharding 的基础上，加一层缓存 Layer，缓存用一个大的环形队列+SymbolTable 来做，可以从中获取最新推文；
+5. 为了优化获取 Feed 的速度，可以为每个用户保存一个 Following 用户的最新推文队列，用户发推之后，更新他所有 Follower 的这个缓存队列
+6. 区分 Celebrity 和普通人，Celebrity 的推文单独存放并且单独做 Cache；
 
 ## 分布式 ID 服务
 
-1. Twitter Snowflake: timestamp + worker number(节点启动时从ZK读取) + sequence number(节点自己生成)
+1. Twitter Snowflake: timestamp + worker number(节点启动时从 ZK 读取) + sequence number(节点自己顺序生成)
+
+## ShortURL 服务
+
+1. API: addURL(url), getURL(shortURL)
+2. 每个用户为同一个 url 生成的 shortURL 不一样；shortURL 自动过期
+3. 根据 url 和用户 ID、时间戳等信息，计算一个 HASH 值，然后用 baseXX 编码
 
 ## Amazon Large Scale
 
@@ -545,18 +584,23 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 7. CloudFront: CDN
 8. S3: Object Store (like Aliyun OSS)
 9. ElastiCache: Redis or Memcache Service
-10. SQS: Queue Service
+10. SimpleQS: Queue Service
 
 ## DB Large Scale
 
 1. Federation: Split functions into different DB
 2. Sharding: Split DB onto multiple hosts
-3. NoSQL
+3. Replication: Multiple Copies
+4. NoSQL
 
 ## Session
 
 1. Use session-aware load balancer
 2. Store session data in distributed cache, like Redis or Memcache
+
+## Provisioning
+
+1. Terraform
 
 ## JIT
 
@@ -587,29 +631,29 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 
 ## Java 并发编程 (synchronized and Lock)
 
-1. 重量级锁，通过占用 monitor 来实现，依赖操作系统 Mutex，需要切换内核态
+1. 重量级锁: 通过占用 monitor 来实现，依赖操作系统 Mutex，需要切换内核态
 2. CAS(Compare And Swap): 修改之前先判断值是否改变
-3. 偏向锁，只有本线程占用对象时，直接执行同步区域，有线程竞争时则撤销偏向，使用轻量级锁尝试锁定
-4. 轻量级锁，尝试用 CAS 方法占用对象，成功的情况下先使用轻量级锁，失败时则膨胀为重量级锁
-5. 自旋锁，用短时的忙等待期待资源迅速被释放，自旋次数根据自旋成功与否自适应改变
-6. 循环 wait()，防止被无效唤醒，修改了数据之后要 notify() 或 notifyAll() 唤醒其他线程
+3. 轻量级锁: 尝试用 CAS 方法占用对象，成功的情况下先使用轻量级锁，失败时则膨胀为重量级锁
+4. 偏向锁: mark word 标记偏向线程 ID；只有本线程占用对象时，直接执行同步区域，有线程竞争时则撤销偏向，使用轻量级锁尝试锁定
+5. 自旋锁: 用短时的忙等待期待资源迅速被释放，自旋次数根据自旋成功与否自适应改变
+6. 循环 wait()，防止被无效唤醒，释放锁之后要 notify() 或 notifyAll() 唤醒其他线程
 7. volatile: 禁止指令重排优化，保证变量值变化时所有线程都立即可见
-8. 实现 singleton 的一个方案，利用静态子类来持有 singleton 对象，getInstance() 返回子类的静态 instance 对象，ClassLoader 保证了对象唯一性，又是线程安全的，避免了同步代码
+8. 实现 Singleton 的一个方案，利用静态子类来持有 Singleton 对象，getInstance() 返回子类的静态 instance 对象，ClassLoader 保证了对象唯一性，又是线程安全的，避免了同步代码
 
 ## Java 并发库
 
 * 老的同步容器，读写全部同步: HashTable, Vector, Stack
-* 同步 Wrapper，对象级锁: SynchronizedMap: Map\<String, String> synchronizedHashMap = Collections.synchronizedMap(new HashMap\<String, String>());
+* 同步 Wrapper，对象级锁: SynchronizedMap: Map<String, String> synchronizedHashMap = Collections.synchronizedMap(new HashMap<String, String>());
 * 并发容器，提供分 Segment 的锁，Java 8 升级为 Bucket 锁: ConcurrentHashMap, CopyOnWriteArrayList
 * 线程安全队列: ArrayBlockingQueue, SynchronousQueue
 
 ## IO 和并发模型
 
-1. 传统同步 IO，InputStream/OutputStream 抽象了字节流，Reader/Writer 则加上了字符编码解码能力，Buffered Stream 增加了缓冲区
-2. Java NIO 中 Selector 监听一堆 Channel，例如 SocketChannel，Channel 把数据读到 Buffer，Channel Ready 后交给 Thread 来处理
+1. 传统同步 IO: InputStream/OutputStream 抽象了字节流，Reader/Writer 则加上了字符编码解码能力，Buffered Stream 增加了缓冲区
+2. Java NIO: Selector 监听一堆 Channel，例如 SocketChannel; Channel 把数据读到 Buffer; Channel Ready 后交给 Thread 来处理
 3. NIO2 支持 Callback 方式的异步 IO，为 Channel 注册 Handler，IO 事件完成后回调 Handler
-4. NIO 提供的 Channel 之间 transferTo() 的方法，利用了操作系统 Zero Copy 技术，无需把内核缓冲区数据拷贝回用户缓冲区，比 I/OStream 对拷效率高
-5. DirectByteBuffer 利用堆外内存，可以保存生命周期较长的对象，可以用于 Zero Copy IO，可以规避 GC 暂停，这些内存通过 PhantomReference 和 Cleaner 机制回收
+4. NIO 提供的 Channel 之间 transferTo() 的方法，利用了操作系统 Zero Copy 技术，无需把内核缓冲区数据拷贝回用户缓冲区，比 IOStream 对拷效率高
+5. Direct ByteBuffer 利用堆外内存，可以保存生命周期较长的对象，可以用于 Zero Copy IO，可以规避 GC 暂停，这些内存通过 PhantomReference 和 Cleaner 机制回收
 
 * Delegator + Workers 模式：Worker 以 Blocking 的方式运行，需等待 IO，Worker 线程遇到慢 IO 时可能被耗光
 * Reactor + Channel 模式：Worker 以 Non-blocking 模式运行，遇到 IO 注册 IO 完成事件，然后交出控制权回到线程池
@@ -634,19 +678,50 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 
 # Hadoop and Spark Review
 
-1. reduce() 接受一个函数，参数是两个 RDD 中的元素，返回和参数同类型的聚合值
-2. fold() 多接受一个零值，函数将 RDD 里的值和零值合并
-3. aggregate() 又多接受一个函数，一个函数负责零值和 RDD 元素的合并，另一个函数负责两个 RDD 元素的合并，因此零值类型可以和元素类型不同
-4. map() 是个 transformation，它的函数将每个元素进行一个转换并返回新元素，而 foreach() 是个 action，它不返回新 RDD，函数主要是 Side effect
-5. countByValue() 类似于 bash 的 uniq -c
-6. 主要集合操作 union(), intercection(), substract(), cartesian()
-7. reduceByKey() 用于将 Pair RDD 按照 Key 进行 reduce；类似的 groupByKey() 按 Key 聚合成集合；foldByKey() 按 Key 来 fold()
-8. combineByKey() 和 aggregate 类似，按照 Key 进行元素合并，首先在分区内提供将元素映射成累加值，以及累加值和元素合并两个方法，分区间提供累加值互相合并的方法
-9. mapValues() 相当于 map() 只修改 Value；flatMapValues() 和 flatMap() 类似，都将传入的 Value 转换成 Iterable
-10. 主要 KV RDD 相交操作 join(), left(right)OuterJoin(), cogroup()
-11. cogroup() 将两个 Pair RDD 按照 Key 合并，每个 Key 对应两个 Iterable，分别是原 RDD 的元素集合，join() 基于它实现
-12. mapPartitions(WithIndex)() 和 foreachPartitions() 分别都在分区内进行循环
-13. pipe() 用来和外部脚本、程序进行对接
+## HDFS
+
+1. NameNode
+2. SecondaryNameNode: 并不是热备份，而是定期把 NameNode 的新 edits 同步到 fsimage 文件系统快照中
+3. DataNode
+
+## Yarn
+
+1. ResourceManager: 集群 Master
+2. NodeManager: 节点 Manager
+3. ApplicationMaster: 应用的 Master；对应 MR 的话就相当于 Hadoop1 里面的 JobTracker；对应 Spark 的话就是 Driver
+4. Container: 干活的节点
+
+## Spark
+
+1. Driver: SparkContext
+2. Executor: 运行在一个 Container 中，可以有多个 Core，同时执行多个 Task
+
+### Transformations
+
+1. map(): 它的函数将每个元素进行一个转换并返回新元素: func(T): U
+2. filter(): 它的函数返回 true or false: func(T): Boolean
+3. 主要集合操作 union(), intercection(), substract(), cartesian(), distinct()
+
+### Actions
+
+1. reduce(): 接受一个函数，参数是两个 RDD 中的元素，返回和参数同类型的聚合值: func(T, T): T
+2. fold(zero)(): 多接受一个零值，函数将 RDD 里的值和零值合并: func(T, T): T
+3. aggregate(zero)()(): 又多接受一个函数，一个负责零值和 RDD 元素合并，另一个负责两个 RDD 元素合并，零值类型可以和元素类型不同: func(Z, T): T, func(T, T): T
+4. foreach(): 它不返回新 RDD，函数主要是 Side effect: func(T): Unit
+5. countByValue(): 类似于 bash 的 uniq -c，没有参数，返回元素和元素计数的 Map
+
+### PairRDD Transformations and Actions
+
+1. reduceByKey(): 用于将 Pair RDD 按照 Key 进行 reduce，聚合相同 Key 的 Value，生成还是 Pair RDD
+2. groupByKey(): 按 Key 聚合成集合，新 RDD 的 Value 变成 Iterable
+3. foldByKey()(): 按 Key 来 fold()
+4. combineByKey(): 按照 Key 进行元素合并，首先在分区内提供将元素映射成累加值，以及累加值和元素合并两个方法，分区间提供累加值互相合并的方法
+5. mapValues() 相当于 map() 只修改 Value
+6. flatMapValues() 和 flatMap() 类似，都将传入的 Value 转换成一系列值 Seq
+7. 相交操作 join(), left(right)OuterJoin(), cogroup()
+8. cogroup() 将两个 Pair RDD 按照 Key 合并，每个 Key 对应两个 Iterable，分别是原 RDD 的元素集合，join() 基于它实现
+9. mapPartitions(WithIndex)() 和 foreachPartitions() 分别都在分区内进行循环
+10. pipe() 用来和外部脚本、程序进行对接
 
 # OOD Examples
 
