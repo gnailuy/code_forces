@@ -723,6 +723,14 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 9. mapPartitions(WithIndex)() 和 foreachPartitions() 分别都在分区内进行循环
 10. pipe() 用来和外部脚本、程序进行对接
 
+## Kafka
+
+1. 一个 Topic 相当于一个 Queue
+2. Topic 被拆分为多个 Partition，Partition 内部消息是排序的，Partition 有备份
+3. 一个 Partition 位于一个 Broker 中，一个 Broker 管理多个 Partition
+4. 多个 Brokers 组成 Kafka Cluster
+5. Consumers group，一个 group 对一个消息只能消费一次
+
 # OOD Examples
 
 1. Handling Ambiguity: Question Type (OOD, System Design, Algorithm)
