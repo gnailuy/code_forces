@@ -8,6 +8,11 @@ Euclid's Algorithm: 大数除小数；小数变大数，余数为新的小数；
 
 Newton's Method: 循环 k = (k + x/k)/2，直至 k*k 和 x 相差小于阈值，k 即为 sqrt(x) 的近似值，k 初始可以为 1
 
+## Prime Numbers
+
+1. 栅格法预处理
+2. 大数用 Rabin-Miller 算法
+
 ## Arithmetic Expression (((2 - 5) + 1) * 2)
 
 * Dijkstra's Double Stack: 一个操作符栈，一个操作数栈，遇到右括号则计算，可转后缀表达式
@@ -683,6 +688,17 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 1. NameNode
 2. SecondaryNameNode: 并不是热备份，而是定期把 NameNode 的新 edits 同步到 fsimage 文件系统快照中
 3. DataNode
+
+## HBase
+
+1. HMaster: 负责管理 Region，把 Region 分配给某个 Server，处理 DDL API
+2. Region Server: 负责实际数据读写，可以维护多个 Region，数据副本通过 HDFS 实现
+3. ZK: 负责集群状态维护，例如 Meta 表位置，Region 和 HMaster 在线状态等
+4. Meta 表: 维护了 Region 分布信息，查询数据时先找 ZK 找到 Meta 表，然后再找到具体 Region，客户端会缓存 Meta 信息
+5. 读数据顺序：BlockCache, MemStore, HFile 索引
+6. 写入数据: Region Server 负责; 先写 WAL 和 MemStore，MemStore 满了落地成 HFile
+7. HFile: 在 Compact 中合并，平时 Minor Compact 小文件变大文件，定期 Major Compact  所有 Region 内小文件合并成一个大文件，HFile 过大时还会拆分成两个
+8. FuzzyFilter Scan
 
 ## Yarn
 
