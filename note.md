@@ -53,6 +53,7 @@ Newton's Method: 循环 k = (k + x/k)/2，直至 k*k 和 x 相差小于阈值，
 
 ## Permutation (全排列)
 
+* 排列数：P(N, k) = N*(N-1)*...*(N-k+1) = N!/(N-k)!
 * 递归参数 List<Item> prefix, Set<items> set, List<List<Item>> result
 * 如果 set 空了，则将当前 prefix 拷贝一份加入 result
 * 否则循环 set 中的元素，每次取出这个元素加入 prefix，递归调用，递归结束之后再把元素从 prefix 取出，加回 set
@@ -65,6 +66,7 @@ Hint: 例如 1234 四个数的排列，1 开头的话，234 总共六个排列�
 
 ## Combination (生成组合)
 
+* 组合数：C(N, k) = P(N, k)/P(k, k) = P(N, k)/k!
 * 把元素放在一个数组里面，从头开始考虑，每考虑一个元素，递归后面剩余元素，然后输出带该元素和不带该元素两种组合；
 * 把元素放在数组里面，然后取一个整数从 0 开始加一，每次对应位为 1 则取该元素，对应位位 0 则不取；
 
@@ -306,7 +308,8 @@ D       G      B
 
 ## 按词翻转句子 (hello world 变 world hello)
 
-翻转字符串，然后每个单词原地翻转
+1. 翻转字符串，然后每个单词原地翻转
+2. 使用一个 Stack，每读一个单词放入栈里，然后弹出栈组成新字符串
 
 ## 压缩算法
 
@@ -644,6 +647,7 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 6. 循环 wait()，防止被无效唤醒，释放锁之后要 notify() 或 notifyAll() 唤醒其他线程
 7. volatile: 禁止指令重排优化，保证变量值变化时所有线程都立即可见
 8. 实现 Singleton 的一个方案，利用静态子类来持有 Singleton 对象，getInstance() 返回子类的静态 instance 对象，ClassLoader 保证了对象唯一性，又是线程安全的，避免了同步代码
+9. Semaphore: 基于 counter，Semaphore(N) 表示一个允许 N 个线程同时拿到 permit 的 Semaphore，每一个线程拿到 permit，count--，释放 permit，count++，N 等于 1 时效果等于 Mutex
 
 ## Java 并发库
 
