@@ -537,6 +537,7 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * LinkedHashMap 是双向链表加哈希，可以实现按照插入顺序遍历，实现 Cache 很方便
 * TreeMap 基于 RedBlackTree 实现，可以按照自然大小顺序遍历
 * PriorityQueue 也可以按自然大小顺序遍历，基于 Heap 实现
+* ConcurrentHashMap 早期实现了分离锁 (Segment)，并发效率更高；Java8 以后做了改进，按照 Bucket 中 bin 链表来同步，锁在链表头上
 
 ### Vector, ArrayList, LinkedList
 
