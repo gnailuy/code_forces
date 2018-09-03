@@ -766,40 +766,55 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 
 ## Poker Card
 
-public class Player: A Strategy, A Hand, getCard
-public class Hand: An Array of Card
-public class Card: CardType (), CardValue
-public class Deck: 一副牌, shuffle, getNext
-public class Shoe: An Array of Deck, shuffle, getNext
+* public class Player: A Strategy, A Hand, getCard
+* public class Hand: An Array of Card
+* public class Card: CardType (), CardValue
+* public class Deck: 一副牌, shuffle, getNext
+* public class Shoe: An Array of Deck, shuffle, getNext
 
 ## Parkinglot
 
-abstract class Vehicle: LicensePlate, extends to Motocycle, Car, Truck, Bus
-public class Car: size, spot, getSpot(), parkIn(), moveOut()
-public class Spot(long id, enum Size): id, size, vehicle, park(), clear(), isAvailable()
-public class Parkinglot: availableSpots, findSpot(), parkVehicle(), removeVehicle()
-Level (多层停车)
+* abstract class Vehicle: LicensePlate, extends to Motocycle, Car, Truck, Bus
+* public class Car: size, spot, getSpot(), parkIn(), moveOut()
+* public class Spot(long id, enum Size): id, size, vehicle, park(), clear(), isAvailable()
+* public class Parkinglot: availableSpots, findSpot(), parkVehicle(), removeVehicle()
+* Level (多层停车)
 
 ## ATM
 
-Objects: User, Operator (Start, Shutdown, AddCash), Bank (Backend), Logger
-Controller: Session (用户插卡，验证身份，密码多次错误等情况), Transaction (Inquiry, Withdrawal, Deposit, Transfer)
-Entity: Card, Receipt, Balance
+* Objects: User, Operator (Start, Shutdown, AddCash), Bank (Backend), Logger
+* Controller: Session (用户插卡，验证身份，密码多次错误等情况), Transaction (Inquiry, Withdrawal, Deposit, Transfer)
+* Entity: Card, Receipt, Balance
 
 ## Vending Machine
 
-VendingMachine: Interface (newSession(), reset(), addItem(), removeItem(), insertCoin(), collectItemAndChange())
-VendingMachineImpl implements VendingMachine: (Inventory<Item> Inventory<Coin>, Inventory<BankNote>, currentItemList, currentPrice, currentBalance)
-VendingMachineFactory: createVendingMachine()
-Item: name, price
-Inventory: A map of item/coin/banknote to count
-Coin and BankNote: enum public enum Coin{PENNY(1), NICKLE(5), DIME(10), QUARTER(25);}
+* VendingMachine: Interface (newSession(), reset(), addItem(), removeItem(), insertCoin(), collectItemAndChange())
+* VendingMachineImpl implements VendingMachine: (Inventory<Item> Inventory<Coin>, Inventory<BankNote>, currentItemList, currentPrice, currentBalance)
+* VendingMachineFactory: createVendingMachine()
+* Item: name, price
+* Inventory: A map of item/coin/banknote to count
+* Coin and BankNote: enum public enum Coin{PENNY(1), NICKLE(5), DIME(10), QUARTER(25);}
 
 ## Desigh Schedule System
 
 Outlook Calendar, Help the team to schedule meeting room
 
+* enum public enum WeekDay{SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;}
+* MeetingRoom: id, name, location, capacity, properties (screen, phone), monthsMap
+* Day: date, weekday, 48 slots of 30 minutes, stores meeting id
+* Month: yearmonth, dayList
+* Meeting: id, host, listOfParticipants, meetingRoomID, timeRange
+* Meetings and MeetingRooms: Map of ID to Object
+
+* MeetingRoom: addMeeting, deleteMeeting, private updateMonthsList (while adding or deleting meeting, check last update timestamp first)
+* MeetingRooms: showMonth(yearmonth), showWeek(date)
+
 # System Design
 
 ## Design Uber
+
+* Entity and Database: Car, User, Trip
+* Location Service: Car update location, User update location, findDistance, findNearKAvailableCars
+* Order Service: user place an order, find available cars, rate cars and pick one, send order, track trip
+* Logging Service and History Order Service: query historical orders
 
