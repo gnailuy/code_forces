@@ -550,6 +550,7 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * 基础数据类型 short int long double float char boolean byte 八个
 * 对应都有 Wrapper 类型，Java 提供了 boxing 和 unboxing 的功能，自动转换
 * 鉴于程序中常用的数字范围有限，valueOf() 方法是有缓存的，使得 Wrapper 类型使用更高效
+* Integer 128 以内的自动装箱都使用了 IntegerCache，因此装箱返回的对象是同一个，超过 128 则 new Integer；
 
 ### 反射
 
