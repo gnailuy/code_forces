@@ -811,6 +811,13 @@ Outlook Calendar, Help the team to schedule meeting room
 * MeetingRoom: addMeeting, deleteMeeting, private updateMonthsList (while adding or deleting meeting, check last update timestamp first)
 * MeetingRooms: showMonth(yearmonth), showWeek(date)
 
+## Design Bookreview API
+
+* Book: isbn, name, list of author, description, link
+* Review: score, comment
+* BookReview: List<Review> getReviewList(String isbn), List<Review> getReviewList(String isbn, int number)
+* Store partition in memory: ConcurrencyHashMap, Init in Constructer, Update periodically in another thread
+
 # System Design
 
 ## Design Uber
