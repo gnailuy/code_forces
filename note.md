@@ -569,7 +569,7 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 ### Java 排序
 
 * Arrays.sort() 在 primitive type 上用的是三路 QuickSort
-* 在对象类型上用的是归并排序，结合小数组上的插入排序，保证排序稳定
+* 在对象类型上用的是改良的归并排序 (Timsort)，结合小数组上的插入排序，保证排序稳定
 
 ## Realtime Chat
 
