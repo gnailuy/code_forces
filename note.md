@@ -66,7 +66,7 @@ Newton's Method: 循环 k = (k + x/k)/2，直至 k*k 和 x 相差小于阈值，
 * 递归参数 List<Item> prefix, Set<items> set, List<List<Item>> result
 * 如果 set 空了，则将当前 prefix 拷贝一份加入 result
 * 否则循环 set 中的元素，每次取出这个元素加入 prefix，递归调用，递归结束之后再把元素从 prefix 取出，加回 set
-* 如果元素是数组，可以用 Backtracking 循环把每个元素交换到当前递归的投一位，然后递归调用后面部分，递归完成后复位
+* 如果元素是数组，可以用 Backtracking 循环把每个元素交换到当前递归的头一位，然后递归调用后面部分，递归完成后复位
 * 如果是字符全排列，prefix 可以是字符串，字符串粘贴就不用复制了，但是用 StringBuilder Backtracking 可能会快一点
 
 ## 第 K 个全排列
