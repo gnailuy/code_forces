@@ -571,34 +571,6 @@ Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpi
 * Arrays.sort() 在 primitive type 上用的是三路 QuickSort
 * 在对象类型上用的是改良的归并排序 (Timsort)，结合小数组上的插入排序，保证排序稳定
 
-## Realtime Chat
-
-1. 客户端使用 Ajax、Comet 等轮询，或者使用 WebSocket 实现双工通信
-2. 服务器端实现一个用户一个 Channel 队列，Channel 中保存用户接受到的消息
-3. 用户各客户端已读位置保存在服务器端，在线时，拉取新的消息
-4. 用户发送的消息保存在接受方的 Channel 中，由客户端负责解析
-5. API 主要包括发消息、获取对话列表、获取对话消息
-6. 可以使用对话ID+时间戳的方式保存对话消息，存放在 KV Store 里面，如 HBase
-
-## Twitter 类似服务
-
-1. 客户端主要关注三个写 API：发推、关注、喜欢；一个读 API：获取 Feed 流。其他 API 类似；
-2. 涉及到用户表、推文表、关注关系表和喜欢表，可以用关系型数据库；
-3. Sharding 方案要考虑的比较多，数据库按照用户分区，这样获取一个用户的 Feed 就涉及到跨分区读和合并；
-4. 可以在按用户分 Sharding 的基础上，加一层缓存 Layer，缓存用一个大的环形队列+SymbolTable 来做，可以从中获取最新推文；
-5. 为了优化获取 Feed 的速度，可以为每个用户保存一个 Following 用户的最新推文队列，用户发推之后，更新他所有 Follower 的这个缓存队列
-6. 区分 Celebrity 和普通人，Celebrity 的推文单独存放并且单独做 Cache；
-
-## 分布式 ID 服务
-
-1. Twitter Snowflake: timestamp + worker number(节点启动时从 ZK 读取) + sequence number(节点自己顺序生成)
-
-## ShortURL 服务
-
-1. API: addURL(url), getURL(shortURL)
-2. 每个用户为同一个 url 生成的 shortURL 不一样；shortURL 自动过期
-3. 根据 url 和用户 ID、时间戳等信息，计算一个 HASH 值，然后用 baseXX 编码
-
 ## Amazon Large Scale
 
 1. EC2: node with web stack
@@ -818,7 +790,7 @@ Outlook Calendar, Help the team to schedule meeting room
 * Meetings and MeetingRooms: Map of ID to Object
 
 * MeetingRoom: addMeeting, deleteMeeting, private updateMonthsList (while adding or deleting meeting, check last update timestamp first)
-* MeetingRooms: showMonth(yearmonth), showWeek(date)
+* MeetingRooms: showMonth(yearmonth), showWeek(date), add/removeMeetingRoom();
 
 ## Design Bookreview API
 
@@ -835,4 +807,32 @@ Outlook Calendar, Help the team to schedule meeting room
 * Location Service: Car update location, User update location, findDistance, findNearKAvailableCars
 * Order Service: user place an order, find available cars, rate cars and pick one, send order, track trip
 * Logging Service and History Order Service: query historical orders
+
+## Realtime Chat
+
+1. 客户端使用 Ajax、Comet 等轮询，或者使用 WebSocket 实现双工通信
+2. 服务器端实现一个用户一个 Channel 队列，Channel 中保存用户接受到的消息
+3. 用户各客户端已读位置保存在服务器端，在线时，拉取新的消息
+4. 用户发送的消息保存在接受方的 Channel 中，由客户端负责解析
+5. API 主要包括发消息、获取对话列表、获取对话消息
+6. 可以使用对话ID+时间戳的方式保存对话消息，存放在 KV Store 里面，如 HBase
+
+## Twitter 类似服务
+
+1. 客户端主要关注三个写 API：发推、关注、喜欢；一个读 API：获取 Feed 流。其他 API 类似；
+2. 涉及到用户表、推文表、关注关系表和喜欢表，可以用关系型数据库；
+3. Sharding 方案要考虑的比较多，数据库按照用户分区，这样获取一个用户的 Feed 就涉及到跨分区读和合并；
+4. 可以在按用户分 Sharding 的基础上，加一层缓存 Layer，缓存用一个大的环形队列+SymbolTable 来做，可以从中获取最新推文；
+5. 为了优化获取 Feed 的速度，可以为每个用户保存一个 Following 用户的最新推文队列，用户发推之后，更新他所有 Follower 的这个缓存队列
+6. 区分 Celebrity 和普通人，Celebrity 的推文单独存放并且单独做 Cache；
+
+## 分布式 ID 服务
+
+1. Twitter Snowflake: timestamp + worker number(节点启动时从 ZK 读取) + sequence number(节点自己顺序生成)
+
+## ShortURL 服务
+
+1. API: addURL(url), getURL(shortURL)
+2. 每个用户为同一个 url 生成的 shortURL 不一样；shortURL 自动过期
+3. 根据 url 和用户 ID、时间戳等信息，计算一个 HASH 值，然后用 baseXX 编码
 
