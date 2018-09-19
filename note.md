@@ -801,6 +801,26 @@ Outlook Calendar, Help the team to schedule meeting room
 
 # System Design
 
+1. Describe the big picture first
+2. Start with something simple
+3. Compare different options
+
+Key points
+
+1. scalability theory
+2. load-balancing
+3. redundancy
+
+https://www.quora.com/What-is-the-best-way-to-prepare-for-a-System-Design-interview-for-Amazon
+
+1. Requirements clarifications
+2. System interface definition: Define what APIs are expected from the system.
+3. Back-of-the-envelope estimation: Estimate the scale of the system.
+4. Define data model: Clarify how data will flow among different components, guide you towards data partitioning.
+5. High-level design: Draw a block diagram of core components.
+6. Detailed component design: Dig deeper into a few components.
+7. Bottlenecks: Bottlenecks and different approaches to mitigate them.
+
 ## Design Uber
 
 * Entity and Database: Car, User, Trip
