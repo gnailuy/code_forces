@@ -395,12 +395,13 @@ D       G      B
 ### NoSQL DB
 
 * Big Table (Column-based): HBase
-* Key Value DB: Riak
+* Cassandra: (Eventually and Strong Consistency) Consistency Hash + Gossip
+* Key Value DB: DynamoDB, Riak
 * Document DB: MongoDB
 * Search: Elastic
 * Graph DB: Neo4j
 * ACID: Atomicity, Consistency, Isolation, Durability
-* CAP: Consistency, Availability, Partition Tolerance (CP: Zookeeper; AP: DynamoDB; 网络是不稳定的，网络中断导致分区是不可避免的)
+* CAP: Consistency, Availability, Partition Tolerance (CP: Zookeeper; AP: DynamoDB; 网络是不稳定的，网络中断导致分区往往是不可避免的，一定要实现 P，所以必须在 C 和 A 之间进行选择)
 * Paxos
 * BASE: Base Available, Soft-state, Eventually Consistence
 
@@ -446,7 +447,7 @@ D       G      B
 * 写入策略：Write Through (同时写), Write Back (写 Cache 然后刷回 DB), Write Around (写 DB 然后 Invalid Cache)
 * 替换策略：LRU, LFU (Frequency)
 
-## Moniting and Logging
+## Monitoring and Logging
 
 * Ganglia/Zabbix
 * Log Rotation
@@ -464,6 +465,12 @@ D       G      B
 ## Performance
 
 * https://gist.github.com/jboner/2841832
+
+## Testing
+
+* Unit tests
+* Integration tests
+* Mocking
 
 ## Design Pattern
 
@@ -820,6 +827,15 @@ https://www.quora.com/What-is-the-best-way-to-prepare-for-a-System-Design-interv
 5. High-level design: Draw a block diagram of core components.
 6. Detailed component design: Dig deeper into a few components.
 7. Bottlenecks: Bottlenecks and different approaches to mitigate them.
+
+1. Questions: feature set, scale(data volume, qps, latency, etc.)
+2. Think out load, think clear and organized
+3. Component and APIs
+4. Data model, data flow, database
+5. Availability
+6. Latency
+7. Scalability
+8. Security, Monitoring, Logging
 
 ## Design Uber
 
