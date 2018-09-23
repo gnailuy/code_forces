@@ -401,9 +401,10 @@ D       G      B
 * Search: Elastic
 * Graph DB: Neo4j
 * ACID: Atomicity, Consistency, Isolation, Durability
-* CAP: Consistency, Availability, Partition Tolerance (CP: Zookeeper; AP: DynamoDB; 网络是不稳定的，网络中断导致分区往往是不可避免的，一定要实现 P，所以必须在 C 和 A 之间进行选择)
-* Paxos
 * BASE: Base Available, Soft-state, Eventually Consistence
+* CAP: Consistency, Availability, Partition Tolerance (CP: Zookeeper; AP: DynamoDB; 网络是不稳定的，网络中断导致分区往往是不可避免的，一定要实现 P，所以必须在 C 和 A 之间进行选择)
+* Paxos: 分布式一致性
+* Gossip: 随机选择节点进行信息交换，最终将信息传遍全网；push-based 和 pull-based
 
 ### DB Storage
 
