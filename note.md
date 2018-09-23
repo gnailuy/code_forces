@@ -809,6 +809,7 @@ Outlook Calendar, Help the team to schedule meeting room
 
 # System Design
 
+0. Think out load, think clear and organized
 1. Describe the big picture first
 2. Start with something simple
 3. Compare different options
@@ -829,14 +830,16 @@ https://www.quora.com/What-is-the-best-way-to-prepare-for-a-System-Design-interv
 6. Detailed component design: Dig deeper into a few components.
 7. Bottlenecks: Bottlenecks and different approaches to mitigate them.
 
-1. Questions: feature set, scale(data volume, qps, latency, etc.)
-2. Think out load, think clear and organized
-3. Component and APIs
-4. Data model, data flow, database
+Steps (Work solution before Optimization):
+
+1. Questions: Feature set, Constrain(C or A)
+2. Scale and Calculations: Data volume, Traffic(QPS, TPS), Latency, 机器选型和机器数
+3. Abstract Design: Use case, Components, and APIs
+4. Data: Data model, Data flow, Database
 5. Availability
-6. Latency
-7. Scalability
-8. Security, Monitoring, Logging
+6. Scalability
+7. Latency, Optimization
+8. Monitoring, Logging, Security
 
 ## Design Uber
 
