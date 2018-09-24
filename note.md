@@ -875,4 +875,5 @@ Steps (Work solution before Optimization):
 1. API: addURL(url), getURL(shortURL)
 2. 每个用户为同一个 url 生成的 shortURL 不一样；shortURL 自动过期
 3. 根据 url 和用户 ID、时间戳等信息，计算一个 HASH 值，然后用 baseXX 编码
+4. 考虑使用 optimistic locking 来解决冲突问题
 
