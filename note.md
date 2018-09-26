@@ -462,6 +462,7 @@ D       G      B
 * Resource Decouple
 * Cache Coherence: 缓存一致性模型通常对程序员透明，它指的是多核情况下，每个核的 L1 缓存一致性，Write Through 情况下，每个核的 L1 之间要有通知机制，使得其他核知道缓存失效，Write Back 的情况下也是如此，但还要保证数据写回共享缓存或者主存之后才能读，通过写之前标记内存状态来实现
 * Memory Consistency: 内存一致性模型主要是为了保证多核情况下读写内存的一致性，程序员的角度看，可以通过原子操作来，如加锁
+* 乐观锁和悲观锁
 
 ## Performance
 
