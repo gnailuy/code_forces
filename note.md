@@ -463,6 +463,9 @@ D       G      B
 * Cache Coherence: 缓存一致性模型通常对程序员透明，它指的是多核情况下，每个核的 L1 缓存一致性，Write Through 情况下，每个核的 L1 之间要有通知机制，使得其他核知道缓存失效，Write Back 的情况下也是如此，但还要保证数据写回共享缓存或者主存之后才能读，通过写之前标记内存状态来实现
 * Memory Consistency: 内存一致性模型主要是为了保证多核情况下读写内存的一致性，程序员的角度看，可以通过原子操作来，如加锁
 * 乐观锁和悲观锁 Optimistic and Pessimistic locking: 乐观锁在尝试更新时才检查是否存在冲突，悲观锁则先尝试锁定资源，确保锁定时再更新再更新；使用一个版本号和数据放在一起，更新的时候检查版本号，原子操作
+* 分布式锁：1. MySQL 等数据库，用一张表作为锁，用一个 Transaction 进行 Query+Write 的操作，保证原子性，使用机器编号+线程编号标记加锁的客户端，可以用乐观锁优化；
+* 分布式锁：2. Curator 封装了 Zookeeper 的 API，提供了一些分布式锁的实现 InterProcess*，性能和 MySQL 差不多，都算是比较慢的；
+* 分布式锁：3. 使用 Redis，例如 `set resourceName value ex 5 nx`，同时设置了超时时间；Redis 客户端 Redission 实现了分布式锁，可以考虑替代 Jedis；Redission 实现了 RedLock，需要 Redis 集群的支持，原理是多数节点加锁成功才算成功，降低节点失效造成锁失效的概率；
 
 ## Performance
 
