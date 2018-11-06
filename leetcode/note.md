@@ -49,6 +49,7 @@
 6. Swap Nodes in Pairs@24: 给定链表，每两个节点交换位置，如 1 2 3 4，得到 2 1 4 3；设置一个 dummy node 放在 head 前面，这样后面的交换逻辑好写；
 7. Reverse Nodes in k-Group@25: 给定链表，每 K 个节点的子链翻转，最后不足 K 个的不管；还是设置个 dummy node，然后每数 K 个节点，记录前序、后续链表指针，翻转然后重新组装；
 8. Substring With Concatenation of All Words@30: 给定字符串 s，和一个等长字符串的数组 words，求数组中所有字符串组合，是否是 s 的子串；利用数组中字符串等长这个特点，滑动窗口考察所有 words[0].length()\*words.length 这样长度的 s 的子串，如果每隔 words[0].length() 这样的距离，都是 words 中的合法 word，那么字串就符合要求；考虑到数组中重复的字符串，可以用一个 WordCountMap 来替代数组 words；
+9. Next Permutation@31: 给定一个数组，可能存在重复字符，求其字典序的下一个组合；算出所有组合太慢了，考虑到字典序，先自右向左找到第一个 a[i-1] < a[i] 的元素，然后用右方第一个大于 a[i-1] 的元素替代 a[i-1]，最后求 a[i] 及其右方所有元素的最小排列即可，也就是右方升序排序，考虑到已经是降序了，所以倒序一下即可；
 
 ## Hard
 
