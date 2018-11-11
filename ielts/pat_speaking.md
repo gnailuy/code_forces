@@ -78,10 +78,51 @@ You should say:
 
 and explain why this discussion was interesting for you.
 
+## Describe a teacher who has influenced you.
+## Describe someone who helped you before.
+## Describe someone who you have studied or worked with.
+## Describe a neighbor who helped you before.
+## Describe an important person in your life.
+## Describe a family member.
+## Describe a person who can speak a foreigh language well.
+## Describe an old person who you admire.
+## Describe someone who gave you good advice.
+
+## Describe a subject you liked at school.
+## Describe the first day of a course you attended.
+## Describe an ideal job.
+
+## Describe a special meal you had recently.
+## Describe a happy event in your childhood.
+## Describe a difficult thing you can do well.
+## Describe a brithday party.
+## Describe a skill.
+## Describe a good cook.
+## Describe an interesting thing you did in your spare time recently.
+## Describe an exciting experience.
+
+## Describe an electronic device (not a computer).
+## Describe your favourite method of communication.
+## Describe a gift you have received.
+## Describe something you saved money for a long time to buy.
+## Describe an expensive thing you want to buy.
+## Describe something you use every day.
+## Describe something you lost.
+
 # Task 3: Discussion; people, society, your country, the world/global, formal
 
 ## Why do some parents give their children money to spend each week?
 ## Do you agree that schools should teach children how to manage money?
 ## Do you think it is a good idea for students to earn money while studying?
 ## Do you think richer countries have a responsibility to help poor countries?
+
+## What do you think is a healthy lifestyle?
+## What are the differneces between modern buildings and traditional buildings?
+## What are the differences between fresh food and canned food?
+## How do TV programmes affect education?
+## What do you think of giving children gifts when they behave weel?
+## What's your idea of success?
+## Who can give good advice to us?
+## How can we solve the problem of global warming?
+## What are the differences between individual sports and team sports?
 
