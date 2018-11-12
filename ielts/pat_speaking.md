@@ -1,8 +1,8 @@
 # Start
 
-* Please switch off your mobile phone.
-* What's your full name? Can you tell me your full name please?
-* Can I see your ID card please?
+* Please switch off your mobile phone. - OK.
+* What's your full name? Can you tell me your full name please? - My given name is xxx, my surname is yyy.
+* Can I see your ID card please? - Here you go.
 
 # Task 1: A chat; keep your answers short and directly; 2 or 3 sentences
 
