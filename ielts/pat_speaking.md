@@ -1,14 +1,23 @@
 # Start
 
 * Please switch off your mobile phone. - OK.
-* What's your full name? Can you tell me your full name please? - My given name is xxx, my surname is yyy.
+* What's your full name? Can you tell me your full name please? - My given name is xxx, and my surname is yyy.
 * Can I see your ID card please? - Here you go.
 
 # Task 1: A chat; keep your answers short and directly; 2 or 3 sentences
 
 ## What do you usually do at weekends?
+
+Well, after five days of hard work, I usually reward myself with a good sleep in the morning. I often skip breakfast on weekends and have brunch instead. In the afternoon, I sometimes go out with my girlfriend to watch a film or stage play.
+
 ## Do you do housework?
+
+Yes, my girlfriend and I share our house works together. I usually vacuum and mop the floor in the morning, and take out the trash before I go to work. We usually cook dinner together, and I will do the dishes after the meal. (do the laundry, repair broken things)
+
 ## Do you prefer to have elderly people or young people as your neighbors?
+
+I think I don't mind if my neighbors are old or young. Young people are often energetic and optimistic and are easier to get along with. While old people are calm and wisdom. So long as we treat each other with respects, I think we can make good neighbors.
+
 ## Do you buy clothes online?
 ## Do you like wearing jewellery? Why?
 ## Do you prefer eating out or eating at home? Why?
