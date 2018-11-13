@@ -514,10 +514,10 @@ A Good Resource: https://sourcemaking.com/design_patterns
 
 ### OOP
 
-Encapsulation: Hiding implementation
-Abstraction: Abstract Data Type; using class/interface instead of implementation to interact
-Inheritance: "is a" relationship; reuse code
-Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpism
+* Encapsulation: Hiding implementation
+* Abstraction: Abstract Data Type; using class/interface instead of implementation to interact
+* Inheritance: "is a" relationship; reuse code
+* Polymorphism: one name, many forms; compiler ploymorphism and runtime ploymorhpism
 
 ### The language
 
