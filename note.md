@@ -718,6 +718,12 @@ A Good Resource: https://sourcemaking.com/design_patterns
 1. Driver: SparkContext
 2. Executor: 运行在一个 Container 中，可以有多个 Core，同时执行多个 Task
 
+0. RDD: 数据分区信息，RDD 的依赖信息；常见的有 HadoopRDD、MappedRDD、FlatMappedRDD 等，包含窄依赖；ShuffledRDD 等则包含 ShuffledDependency 宽依赖
+1. 通过一系列 Transformations，RDD 构造成一个 DAG
+2. RDDScheduler 根据数据分区，依赖关系分析 DAG，划分 Stage，形成执行计划
+3. Transformations 分为 Narrow transformation 和 Wide transformation(groupBy, join 等)，Stage 划分根据后者
+4. Actions 之后执行计划提交给 TaskScheduler，然后分发给集群节点来运行
+
 ### Transformations
 
 1. map(): 它的函数将每个元素进行一个转换并返回新元素: func(T): U
